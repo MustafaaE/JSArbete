@@ -1,7 +1,20 @@
+fetch("./products.json")
+  .then(function (respons) {
+    console.log(respons); //ska få status 200
+    if (respons.ok) {
+      return respons.json(); //parsea json objektet.
+    }
+  })
+  .then((data) => {
+    createProducts(data);
 
+  })
+  .catch((error) => console.log(error));
+ 
 
-
-
+  function createProducts(p){
+      console.log(p);
+  }
 
 
 
