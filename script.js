@@ -28,3 +28,5 @@ localStorage.setItem('productcart',JSON.stringify(products)); //spara i lokal da
 let otherProducts = JSON.parse(localStorage.getItem('productcart'));
 
 console.log(otherProducts[0].name); */
+
+
