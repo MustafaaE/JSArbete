@@ -23,12 +23,15 @@ fetch("./products.json")
       elements.forEach(product => {
         let imgcontainer = document.createElement("div");
         let image = document.createElement("img");
-        let info = document.createElement("span");
+        let info = document.createElement("a");
 
         imgcontainer.className = "product-preview";
         image.className = "product-image";
+        info.className = "product-name";
         image.src = product.image;
         info.textContent = product.title;
+        info.href = "#";
+
         imgcontainer.appendChild(image);
         imgcontainer.appendChild(info);
         productContainer.appendChild(imgcontainer);
