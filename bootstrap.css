@@ -59,12 +59,36 @@ body {
 
 /*/Best products */
 
-.bestproducts {
+.container-bestproducts {
     display: flex;
     justify-content: left;
 }
 
 /*/Best products */
+
+
+/* Products */
+
+.product-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.product-preview {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    margin: 0px 20px;
+}
+
+.product-image{
+    width: 200px;
+    height: 200px;
+}
+
+
+/* Products */
 
 /* Footer */
 

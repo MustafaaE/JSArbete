@@ -1,3 +1,10 @@
+let productContainer = document.querySelector(".product-container");
+
+
+
+
+
+
 fetch("./products.json")
   .then(function (respons) {
     console.log(respons); //ska få status 200
@@ -12,8 +19,20 @@ fetch("./products.json")
   .catch((error) => console.log(error));
  
 
-  function createProducts(p){
-      console.log(p);
+  function createProducts(elements){
+      elements.forEach(product => {
+        let imgcontainer = document.createElement("div");
+        let image = document.createElement("img");
+        let info = document.createElement("span");
+
+        imgcontainer.className = "product-preview";
+        image.className = "product-image";
+        image.src = product.image;
+        info.textContent = product.title;
+        imgcontainer.appendChild(image);
+        imgcontainer.appendChild(info);
+        productContainer.appendChild(imgcontainer);
+      });
   }
 
 
