@@ -88,7 +88,7 @@ fetch("./products.json")
     popupTitle.textContent = test.title;
     popupDesc.textContent = test.description;
     popupCategory.textContent = test.category;
-    popupRating.textContent = test.rating.rate + "" + test.rating.count;
+    popupRating.textContent = "Rating for this product:" + test.rating.rate + "" + "Amount left" + test.rating.count;
     popupPrice.textContent = test.price;
   }
 
@@ -105,25 +105,22 @@ fetch("./products.json")
   }
 
   function addToCart(product){
-    cart.push(product);
+    
     updateCart(product);
-  
+    cart.push(product);
   }
 
   function updateCart(product){
 
-
+    let z = product.id;
     for (let i = 0; i < cart.length; i++) {
       let x = cart[i].id;
-      for (let x =i+1; x< cart.length; x++) {
-        let y = cart[x].id;
-
-        if(x === y){
-          return false;
+        if(z=== x){
+          return;
         }
         
       }
-    }
+    
   
 
     let imgcontainer = document.createElement("div");
