@@ -52,7 +52,7 @@ fetch("./products.json")
         image.src = product.image;
         info.textContent = product.title;
         info.href = "#";
-        price.textContent = product.price +":-";
+        price.textContent = product.price + "$";
         buyproduct.textContent = "Köp";
 
         imgcontainer.appendChild(image);
@@ -87,9 +87,9 @@ fetch("./products.json")
     popupImage.src = test.image;
     popupTitle.textContent = test.title;
     popupDesc.textContent = test.description;
-    popupCategory.textContent = test.category;
-    popupRating.textContent = "Rating for this product:" + test.rating.rate + "" + "Amount left" + test.rating.count;
-    popupPrice.textContent = test.price;
+    popupCategory.textContent = "Category: "+  test.category;
+    popupRating.textContent = "Rating : " + test.rating.rate + " , " + "Amount left: " + test.rating.count;
+    popupPrice.textContent = "Price: " + test.price + "$";
   }
 
   function closePopup(){
@@ -119,8 +119,7 @@ fetch("./products.json")
           return;
         }
         
-      }
-    
+    }
   
 
     let imgcontainer = document.createElement("div");
