@@ -1,0 +1,23 @@
+/*NAVBAR*/
+
+.navbar a:hover {
+    color: white;
+}
+
+.navbar-nav {
+    color: white;
+}
+
+.nav-item {
+    padding: 5px;
+}
+
+.nav-item-home {
+    display: flex;
+    justify-content: right;
+
+}
+
+.nav-item-home a {
+    color: #FFFFFF8C;
+}

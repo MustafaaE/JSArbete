@@ -1,14 +1,10 @@
 /*BODY HTML*/
 body {
-   
 }
 /*BODY HTML*/
 
 /*NAVBAR*/
 
-.navbar{
-  
-}
 .navbar a:hover {
     color: white;
 }
@@ -19,7 +15,7 @@ body {
 
 .nav-item {
     padding: 5px;
-  }
+}
 
 .nav-item-home {
     display: flex;
