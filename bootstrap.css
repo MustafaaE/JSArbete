@@ -1,10 +1,14 @@
 /*BODY HTML*/
 body {
-    padding-top: 40px;
+   
 }
 /*BODY HTML*/
 
 /*NAVBAR*/
+
+.navbar{
+  
+}
 .navbar a:hover {
     color: white;
 }
@@ -27,7 +31,37 @@ body {
     color: #FFFFFF8C;
 }
 
+
 /*NAVBAR*/
+
+/*CartPreview */
+
+.cartPreview{
+    display: flex;
+    justify-self: center;
+    flex-direction: column;
+    position: fixed;
+    background:rgba(44, 46, 44, 0.705);
+    visibility: hidden; 
+    z-index: 5;
+    top: 50%;
+    left: 100%;
+    width: 80%;
+    height: 80%;
+    transform: translate(-50%, -50%);
+
+}
+
+.cart-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.cart-image{
+    width: 75px;
+    height: 100%;
+}
+/*CartPreview */
 
 /*/Category */
 
@@ -98,13 +132,33 @@ body {
 
 /* Popup */
 .popupcontainer{
+    display: flex;
+    justify-self: center;
+    flex-direction: column;
     position: fixed;
-    z-index: 1;
+    background:rgba(60, 87, 66, 0.705);
+    visibility: hidden;
+    z-index: 5;
+    top: 50%;
+    left: 50%;
     width: 80%;
     height: 80%;
-    background-color: black;
+    transform: translate(-50%, -50%);
 }
 
+.popup-topbar {
+    display: flex;
+    flex-direction: row;
+}
+.popup-imageContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+.popup-footer{
+    display: flex;
+    flex-direction: row;
+}
 /* Popup */
 
 /* Footer */

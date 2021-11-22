@@ -14,7 +14,7 @@
 
  <!-- Header -->
  <header>
-  <nav class="navbar fixed-top bg-dark navbar-dark" id="navbar">
+  <nav class="navbar bg-dark navbar-dark" id="navbar">
     <li class="nav-item-home">
       <a class="nav-link" href="index.html">HOME</a>
       <input type="text" id="search" onkeyup="SearchItem()" placeholder="Search.." title="Type in a category">
@@ -28,7 +28,7 @@
                 <a class="nav-link" href="about.html" >ABOUT</a>
               </li>
               <li class="nav-item">
-                  <button type="button" class="hidden-sm btn btn-dark" data-toggle="modal" data-target="#Cart">
+                  <button  type="button" class="shoppingcart-button hidden-sm btn btn-dark" data-toggle="modal" data-target="#Cart">
                       <i class="fa fa-shopping-cart" ></i><a href="#" class="hidden-sm" style="color: #FFFFFF8C">CART</a>
                   </button>
               </li>     
@@ -36,6 +36,10 @@
   </nav>
   </header> 
 <!-- /Header -->
+
+<div class ="cartPreview">
+
+</div>
 
 <h1 class="container d-flex justify-content-center rubrik">RANDOM WEBSHOP</h1>
 
@@ -70,30 +74,28 @@
 
 <div class="popupcontainer" id="popup">
   <div class="popup-topbar">
-    <p class="popup-title"> TETSTSTETETTSTSTSTST</p>
+    <p class="popup-title"> </p>
     <button class="popup-closebutton">X</button>
 
   </div>
 
   <div class="popup-imageContainer">
-    <img class="popup-image">
+    <img class="popup-image" width="300px" height="100%">
+    <p class="popup-description"></p>
   </div>
 
-  <div class="popup-descPrice">
-    <p class="popup-description"></p>
-    <p class="popup-price"></p>
-  </div>
 
   <div class="popup-footer">
     <p class="popup-category"></p>
     <p class="popup-rating"></p>
+    <p class="popup-price"></p>
     <button class="popup-buy-button">Köp</button>
   </div>
 
 
 </div>
 
-<footer class="container-fluid bg-dark ftr1">
+<!--<footer class="container-fluid bg-dark ftr1">
   <div class="linksimg ">
       <div class="ggg">
           <li class="footerlinks"><a  href="index.html">HOME</a></li>
@@ -103,7 +105,7 @@
   
   </div>   
  
-</footer>
+</footer> -->
 
 </body>
 </html>

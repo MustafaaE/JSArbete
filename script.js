@@ -1,6 +1,22 @@
 let productContainer = document.querySelector(".product-container");
 let popupContainer = document.querySelector(".popupcontainer");
+let popupImage = document.querySelector(".popup-image");
+let popupTitle = document.querySelector(".popup-title");
+let popupClose = document.querySelector(".popup-closebutton");
+let popupDesc = document.querySelector(".popup-description");
+let popupCategory = document.querySelector(".popup-category");
+let popupRating = document.querySelector(".popup-rating");
+let popupPrice  = document.querySelector(".popup-price");
+let popupBuyButton = document.querySelector(".popup-buy-button");
+let cartButton = document.querySelector(".shoppingcart-button");
+let cartPreview = document.querySelector(".cartPreview");
 
+popupClose.addEventListener("click", closePopup);
+
+cartButton.addEventListener("click", showCartPopup);
+
+
+let cart =[];
 
 
 
@@ -45,20 +61,98 @@ fetch("./products.json")
         imgcontainer.appendChild(buyproduct);
         productContainer.appendChild(imgcontainer);
 
+        buyproduct.addEventListener("click", ()=>{
+          addToCart(product);
+        });
 
 
 
-       image.addEventListener("click", showProduct);
+       image.addEventListener("click", ()=>{
+        showPopup();
+        fillPopup(product);
+       });
       });
   }
 
+//  let buy = document.querySelector(".buy-button");
+//  buy.addEventListener("click", test);
+ 
 
 
-  function showProduct(){
-   console.log("test");
-   popupContainer.style.display = "block";
-
+  function showPopup(){
+   popupContainer.style.visibility = "visible";
   }
+
+  function fillPopup(test){
+    popupImage.src = test.image;
+    popupTitle.textContent = test.title;
+    popupDesc.textContent = test.description;
+    popupCategory.textContent = test.category;
+    popupRating.textContent = test.rating.rate + "" + test.rating.count;
+    popupPrice.textContent = test.price;
+  }
+
+  function closePopup(){
+    popupContainer.style.visibility = "hidden";
+  }
+
+  function showCartPopup(){
+    if (cartPreview.style.visibility !== "visible"){
+     return cartPreview.style.visibility = "visible";
+    } else{
+      return cartPreview.style.visibility = "hidden";
+    }
+  }
+
+  function addToCart(product){
+    cart.push(product);
+    updateCart(product);
+  
+  }
+
+  function updateCart(product){
+
+
+    for (let i = 0; i < cart.length; i++) {
+      let x = cart[i].id;
+      for (let x =i+1; x< cart.length; x++) {
+        let y = cart[x].id;
+
+        if(x === y){
+          return false;
+        }
+        
+      }
+    }
+  
+
+    let imgcontainer = document.createElement("div");
+    let image = document.createElement("img");
+    let price = document.createElement("p");
+    let title = document.createElement("p");
+    let totalPrice = document.createElement("p");
+    
+    imgcontainer.className = "cart-container";
+    image.className = "cart-image";
+    price.className = "cart-price";
+    title.className = "cart-title";
+    totalPrice.className = "cart-totalPrice";
+
+    image.src = product.image;
+    price.textContent = product.price;
+    title.textContent = product.title;
+
+    totalPrice.textContent = "Det totala priset är :" + product.price;
+    imgcontainer.appendChild(image);
+    imgcontainer.appendChild(title);
+    imgcontainer.appendChild(price);
+    imgcontainer.appendChild(totalPrice);
+
+   cartPreview.appendChild(imgcontainer);
+  
+  }
+
+
 
 
 
