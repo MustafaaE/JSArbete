@@ -88,7 +88,7 @@ fetch("./products.json")
     popupTitle.textContent = test.title;
     popupDesc.textContent = test.description;
     popupCategory.textContent = test.category;
-    popupRating.textContent = test.rating.rate + "" + test.rating.count;
+    popupRating.textContent = "Rating for this product:" + test.rating.rate + "" + "Amount left" + test.rating.count;
     popupPrice.textContent = test.price;
   }
 
