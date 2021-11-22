@@ -147,6 +147,7 @@ p {
 }
 .popup-title {
   font-size: 18px;
+  padding-left: 8%;
 }
 .popup-imageContainer {
   display: flex;
@@ -159,6 +160,7 @@ p {
 .popup-footer {
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
 }
 .popup-closebutton {
   border: 2px solid rgb(31, 29, 29);
