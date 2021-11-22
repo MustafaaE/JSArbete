@@ -1,4 +1,4 @@
-let productContainer = document.querySelector(".product-container");
+let productContainer = document.querySelector(".products-container");
 let popupContainer = document.querySelector(".popupcontainer");
 let popupImage = document.querySelector(".popup-image");
 let popupTitle = document.querySelector(".popup-title");

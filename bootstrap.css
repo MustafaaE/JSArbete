@@ -94,34 +94,7 @@ p {
 
 /*/Best products */
 
-/* Products */
-
-.product-container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  text-overflow: ellipsis;
-}
-
-.product-preview {
-  border: 1px solid black;
-  display: flex;
-  flex-direction: column;
-  margin: 0px 20px;
-  max-width: 220px;
-}
-
-.product-image {
-  width: 200px;
-  height: 200px;
-}
-
-.product-name {
-  display: block;
-  overflow-wrap: break-word;
-}
-
-/* Products */
+/* Products css is in our-products-style.css */
 
 /* Popup */
 .popupcontainer {
