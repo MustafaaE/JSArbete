@@ -1,5 +1,5 @@
 let productContainer = document.querySelector(".product-container");
-
+let popupContainer = document.querySelector(".popupcontainer");
 
 
 
@@ -24,22 +24,41 @@ fetch("./products.json")
         let imgcontainer = document.createElement("div");
         let image = document.createElement("img");
         let info = document.createElement("a");
+        let price = document.createElement("p");
+        let buyproduct = document.createElement("button");
 
         imgcontainer.className = "product-preview";
         image.className = "product-image";
         info.className = "product-name";
+        price.className = "product-price";
+        buyproduct.className = "buy-button";
+
         image.src = product.image;
         info.textContent = product.title;
         info.href = "#";
+        price.textContent = product.price +":-";
+        buyproduct.textContent = "Köp";
 
         imgcontainer.appendChild(image);
         imgcontainer.appendChild(info);
+        imgcontainer.appendChild(price);
+        imgcontainer.appendChild(buyproduct);
         productContainer.appendChild(imgcontainer);
+
+
+
+
+       image.addEventListener("click", showProduct);
       });
   }
 
 
 
+  function showProduct(){
+   console.log("test");
+   popupContainer.style.display = "block";
+
+  }
 
 
 
