@@ -11,11 +11,13 @@ let popupBuyButton = document.querySelector(".popup-buy-button");
 let cartButton = document.querySelector(".shoppingcart-button");
 let cartPreview = document.querySelector(".cartPreview");
 
+
 popupClose.addEventListener("click", closePopup);
 
 cartButton.addEventListener("click", showCartPopup);
 
 let cart = [];
+
 
 fetch("./products.json")
   .then(function (respons) {
@@ -33,7 +35,7 @@ function createProducts(elements) {
   elements.forEach((product) => {
     let imgcontainer = document.createElement("div");
     let image = document.createElement("img");
-    let info = document.createElement("a");
+    let info = document.createElement("p");
     let price = document.createElement("p");
     let buyproduct = document.createElement("button");
 
@@ -45,7 +47,6 @@ function createProducts(elements) {
 
     image.src = product.image;
     info.textContent = product.title;
-    info.href = "#";
     price.textContent = product.price + "$";
     buyproduct.textContent = "Köp";
 
@@ -62,6 +63,13 @@ function createProducts(elements) {
     image.addEventListener("click", () => {
       showPopup();
       fillPopup(product);
+    });
+    info.addEventListener("click", () => {
+      showPopup();
+      fillPopup(product);
+    });
+    buyproduct.addEventListener("click", () => {
+      addToCart(product);
     });
   });
 }
