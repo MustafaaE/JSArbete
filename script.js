@@ -37,7 +37,7 @@ fetch("./products.json")
       elements.forEach(product => {
         let imgcontainer = document.createElement("div");
         let image = document.createElement("img");
-        let info = document.createElement("a");
+        let info = document.createElement("p");
         let price = document.createElement("p");
         let buyproduct = document.createElement("button");
 
@@ -49,7 +49,6 @@ fetch("./products.json")
 
         image.src = product.image;
         info.textContent = product.title;
-        info.href = "#";
         price.textContent = product.price + "$";
         buyproduct.textContent = "Köp";
 
@@ -63,6 +62,10 @@ fetch("./products.json")
           addToCart(product);
         });
 
+        info.addEventListener("click", () => {
+          showPopup();
+          fillPopup(product);
+        });
         image.addEventListener("click", ()=>{
           showPopup();
           fillPopup(product);
