@@ -1,43 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- CHANGED TITEL -->
     <title>Contact Us</title>
-    <link rel="stylesheet" href="bootstrap.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="contact-style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
 </head>
+
 <body>
     <header>
         <nav class="navbar bg-dark navbar-dark" id="navbar">
-          <li class="nav-item-home">
-            <a class="nav-link" href="index.html">HOME</a>
-            <!-- CHANGES NAVBAR SEARCH AND ADD BUTTON USING FORM BOOTSTRAP -->
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-              </form>
-          </li>
-         
+            <li class="nav-item-home">
+                <a class="nav-link" href="index.html">HOME</a>
+                <!-- CHANGES NAVBAR SEARCH AND ADD BUTTON USING FORM BOOTSTRAP -->
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </li>
+
             <ul class="navbar-nav list-group-horizontal justify-content-end">
-                    <li class="nav-item">
-                      <a class="nav-link" href="shop.html" >SHOP</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="about.html" >ABOUT</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class ="nav-link" href="contact.html">CONTACT</a>
-                      </li>
-                    <li class="nav-item">
-                        <button  type="button" class="shoppingcart-button hidden-sm btn btn-dark" data-toggle="modal" data-target="#Cart">
-                            <i class="fa fa-shopping-cart" ></i><a href="#" class="hidden-sm" style="color: #FFFFFF8C">CART</a>
-                        </button>
-                    </li>     
+                <li class="nav-item">
+                    <a class="nav-link" href="shop.html">SHOP</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">ABOUT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">CONTACT</a>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class="shoppingcart-button hidden-sm btn btn-dark" data-toggle="modal" data-target="#Cart">
+                        <i class="fa fa-shopping-cart"></i><a href="#" class="hidden-sm" style="color: #FFFFFF8C">CART</a>
+                    </button>
+                </li>
             </ul>
         </nav>
-        </header> 
+    </header>
+    <main class="container">
+        <form>
+            <div class="form-group">
+                <label for="inputName">Full Name: (Required)</label>
+                <input type="text" class="form-control" placeholder="Enter Full Name">
+            </div>
+            <div class="form-group">
+                <label for="inputEmail">Email: (Required)</label>
+                <input type="email" class="form-control" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+                <label for="inputMsg">Message: (Required)</label>
+                <textarea class="form-control" rows="3"></textarea>
+            </div>
+        </form>
+        <div class="sideImage">
+            <img src="img/Vectors/2451377.jpg" alt="Three people with blue shirts. Two of them are waving. One of them is holding a large telefon">
+            <!-- <a href='https://www.freepik.com/vectors/business'>Business vector created by pikisuperstar - www.freepik.com</a> -->
+        </div>
+    </main>
 </body>
+
 </html>
