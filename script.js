@@ -157,6 +157,7 @@ function addtoTotal(){
   let sum = 0;
   cart.forEach((product) => {
     sum += product.price;
+    sum.toFixed(2);
   });
   cartPreviewtotal.textContent = "Total: " + sum;
 }
