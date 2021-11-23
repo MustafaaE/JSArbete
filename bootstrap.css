@@ -37,24 +37,33 @@ body {
   justify-self: center;
   flex-direction: column;
   position: fixed;
-  background: rgba(44, 46, 44, 0.705);
+  background: rgba(255, 255, 255, 0.95);
   visibility: hidden;
   z-index: 5;
-  top: 50%;
+  top: 32%;
   left: 100%;
-  width: 80%;
-  height: 80%;
-  transform: translate(-50%, -50%);
+  width: 33%;
+  height: 50%;
+  transform: translate(-101%, -50%);
+  border: solid 1px black;
+  box-shadow: 1px 1px 1px 1px black;
 }
 
 .cart-container {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
 }
 
 .cart-image {
   width: 75px;
   height: 100%;
+  padding: 10px 10px;
+}
+
+.cart-title > p {
+  font-size: 15px;
 }
 /*CartPreview */
 
