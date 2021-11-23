@@ -23,3 +23,49 @@ body{
     color: #FFFFFF8C;
 }
 /* Main Design */
+.mainContainer{
+    display: flex;
+    columns: 1fr 1fr;
+    padding-top: 50px;
+    justify-content: space-around;
+}
+.contactImage{
+    max-width: 800px;
+    width: auto;
+    height: auto;
+}
+.contactForm{
+    width: 800px;
+    padding-top: 50px;
+}
+.sendButton{
+    display: flex;
+    justify-content: right;
+}
+@media screen and (max-width: 1650px){
+    .contactImage{
+        max-width: 700px;
+    }
+    .contactForm{
+        padding: 10px;
+    }
+}
+@media screen and (max-width: 1300px){
+    .contactImage{
+        max-width: 500px;
+    }
+    
+}
+@media screen and (max-width: 1000px){
+    .sideImage{
+        visibility: hidden;
+        width: 0px;
+    }
+    .mainContainer{
+        columns: 1fr;
+        justify-content: center;
+    }
+    .contactForm{
+        widows: 100%;
+    }
+}
