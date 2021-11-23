@@ -10,11 +10,13 @@ let popupPrice = document.querySelector(".popup-price");
 let popupBuyButton = document.querySelector(".popup-buy-button");
 let cartButton = document.querySelector(".shoppingcart-button");
 let cartPreview = document.querySelector(".cartPreview");
-
+let cartPreviewtotal = document.querySelector(".cartPreview-total");
 
 popupClose.addEventListener("click", closePopup);
 
 cartButton.addEventListener("click", showCartPopup);
+
+popupBuyButton.addEventListener("click",addFromPopup);
 
 let cart = [];
 
@@ -74,8 +76,7 @@ function createProducts(elements) {
   });
 }
 
-//  let buy = document.querySelector(".buy-button");
-//  buy.addEventListener("click", test);
+
 
 function showPopup() {
   popupContainer.style.visibility = "visible";
@@ -100,16 +101,18 @@ function closePopup() {
 }
 
 function showCartPopup() {
-  if (cartPreview.style.visibility !== "visible") {
-    return (cartPreview.style.visibility = "visible");
-  } else {
-    return (cartPreview.style.visibility = "hidden");
-  }
+   if (cartPreview.style.visibility !== "visible") {
+     return (cartPreview.style.visibility = "visible");
+   } else {
+     return (cartPreview.style.visibility = "hidden");
+    }   
 }
+ 
 
 function addToCart(product) {
   updateCart(product);
   cart.push(product);
+  addtoTotal();
 }
 
 function updateCart(product) {
@@ -145,6 +148,19 @@ function updateCart(product) {
 
   cartPreview.appendChild(imgcontainer);
 }
+
+function addFromPopup(){
+
+}
+
+function addtoTotal(){
+  let sum = 0;
+  cart.forEach((product) => {
+    sum += product.price;
+  });
+  cartPreviewtotal.textContent = "Total: " + sum;
+}
+
 
 /*Hur hemsidan memorerar ens cart när man byter sida.
 
