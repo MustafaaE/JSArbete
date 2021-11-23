@@ -65,12 +65,10 @@ fetch("./products.json")
           addToCart(product);
         });
 
-
-
-       image.addEventListener("click", ()=>{
-        showPopup();
-        fillPopup(product);
-       });
+        image.addEventListener("click", ()=>{
+          showPopup();
+          fillPopup(product);
+        });
       });
   }
 
@@ -83,13 +81,13 @@ fetch("./products.json")
    popupContainer.style.visibility = "visible";
   }
 
-  function fillPopup(test){
+  function fillPopup(test) {
     popupImage.src = test.image;
     popupTitle.textContent = test.title;
     popupDesc.textContent = test.description;
-    popupCategory.textContent = "Category: "+  test.category;
+    popupCategory.textContent = "Category: " + test.category;
     popupRating.textContent = "Rating : " + test.rating.rate + " , " + "Amount left: " + test.rating.count;
-    popupPrice.textContent = "Price: " + test.price + "$";
+    popupPrice.textContent = "Price: $" + test.price;
   }
 
   function closePopup(){
@@ -105,12 +103,11 @@ fetch("./products.json")
   }
 
   function addToCart(product){
-    
     updateCart(product);
     cart.push(product);
   }
 
-  function updateCart(product){
+  function updateCart(product) {
 
     let z = product.id;
     for (let i = 0; i < cart.length; i++) {
@@ -120,7 +117,6 @@ fetch("./products.json")
         }
         
     }
-  
 
     let imgcontainer = document.createElement("div");
     let image = document.createElement("img");
@@ -135,8 +131,9 @@ fetch("./products.json")
     totalPrice.className = "cart-totalPrice";
 
     image.src = product.image;
-    price.textContent = product.price;
     title.textContent = product.title;
+    title.href = "#";
+    price.textContent = "$" + product.price;
 
     totalPrice.textContent = "Det totala priset är :" + product.price;
     imgcontainer.appendChild(image);
@@ -145,12 +142,9 @@ fetch("./products.json")
     imgcontainer.appendChild(totalPrice);
 
    cartPreview.appendChild(imgcontainer);
-  
+//  let buy = document.querySelector(".buy-button");
+//  buy.addEventListener("click", test);
   }
-
-
-
-
 
 /*Hur hemsidan memorerar ens cart när man byter sida.
 
@@ -159,5 +153,3 @@ localStorage.setItem('productcart',JSON.stringify(products)); //spara i lokal da
 let otherProducts = JSON.parse(localStorage.getItem('productcart'));
 
 console.log(otherProducts[0].name); */
-
-
