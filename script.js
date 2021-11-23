@@ -10,12 +10,16 @@ let popupPrice = document.querySelector(".popup-price");
 let popupBuyButton = document.querySelector(".popup-buy-button");
 let cartButton = document.querySelector(".shoppingcart-button");
 let cartPreview = document.querySelector(".cartPreview");
+let cartPreviewtotal = document.querySelector(".cartPreview-total");
 
 popupClose.addEventListener("click", closePopup);
 
 cartButton.addEventListener("click", showCartPopup);
 
+popupBuyButton.addEventListener("click",addFromPopup);
+
 let cart = [];
+
 
 fetch("./products.json")
   .then(function (respons) {
@@ -33,7 +37,7 @@ function createProducts(elements) {
   elements.forEach((product) => {
     let imgcontainer = document.createElement("div");
     let image = document.createElement("img");
-    let info = document.createElement("a");
+    let info = document.createElement("p");
     let price = document.createElement("p");
     let buyproduct = document.createElement("button");
 
@@ -45,7 +49,6 @@ function createProducts(elements) {
 
     image.src = product.image;
     info.textContent = product.title;
-    info.href = "#";
     price.textContent = product.price + "$";
     buyproduct.textContent = "Köp";
 
@@ -63,11 +66,17 @@ function createProducts(elements) {
       showPopup();
       fillPopup(product);
     });
+    info.addEventListener("click", () => {
+      showPopup();
+      fillPopup(product);
+    });
+    buyproduct.addEventListener("click", () => {
+      addToCart(product);
+    });
   });
 }
 
-//  let buy = document.querySelector(".buy-button");
-//  buy.addEventListener("click", test);
+
 
 function showPopup() {
   popupContainer.style.visibility = "visible";
@@ -92,16 +101,18 @@ function closePopup() {
 }
 
 function showCartPopup() {
-  if (cartPreview.style.visibility !== "visible") {
-    return (cartPreview.style.visibility = "visible");
-  } else {
-    return (cartPreview.style.visibility = "hidden");
-  }
+   if (cartPreview.style.visibility !== "visible") {
+     return (cartPreview.style.visibility = "visible");
+   } else {
+     return (cartPreview.style.visibility = "hidden");
+    }   
 }
+ 
 
 function addToCart(product) {
   updateCart(product);
   cart.push(product);
+  addtoTotal();
 }
 
 function updateCart(product) {
@@ -137,6 +148,20 @@ function updateCart(product) {
 
   cartPreview.appendChild(imgcontainer);
 }
+
+function addFromPopup(){
+
+}
+
+function addtoTotal(){
+  let sum = 0;
+  cart.forEach((product) => {
+    sum += product.price;
+    sum.toFixed(2);
+  });
+  cartPreviewtotal.textContent = "Total: " + sum;
+}
+
 
 /*Hur hemsidan memorerar ens cart när man byter sida.
 

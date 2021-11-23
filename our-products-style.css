@@ -33,6 +33,9 @@
   overflow-wrap: break-word;
   text-overflow: ellipsis;
 }
+.product-image:hover, .product-name:hover {
+  cursor:pointer;
+}
 
 .buy-button {
   margin-top: auto;
