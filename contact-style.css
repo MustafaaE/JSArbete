@@ -1,5 +1,7 @@
 /*NAVBAR*/
-
+body{
+    margin: 0%;
+}
 .navbar a:hover {
     color: white;
 }
@@ -15,18 +17,9 @@
 .nav-item-home {
     display: flex;
     justify-content: right;
-
 }
 
 .nav-item-home a {
     color: #FFFFFF8C;
 }
 /* Main Design */
-.container{
-    display: grid;
-    
-}
-.sideImage, img{
-    max-width: 700px;
-    height: 100%;
-}
