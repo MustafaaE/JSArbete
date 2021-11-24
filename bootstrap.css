@@ -70,10 +70,13 @@ body {
 .cart-title > p {
   font-size: 15px;
 }
-.cartPreview-checkout{
-    position:fixed;
-    bottom: 0;
-    width: 100%;
+.cartPreview-checkout {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 /*CartPreview */
 
@@ -143,8 +146,7 @@ p {
 .popup-title {
   font-size: 18px;
   padding-left: 8%;
-  font:bold;
-  
+  font: bold;
 }
 .popup-imageContainer {
   display: flex;
