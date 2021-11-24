@@ -11,8 +11,7 @@ let popupBuyButton = document.querySelector(".popup-buy-button");
 let cartButton = document.querySelector(".shoppingcart-button");
 let cartPreview = document.querySelector(".cartPreview");
 let cartPreviewtotal = document.querySelector(".cartPreview-total");
-let electronicscategory = document.querySelector("#electronics-category");
-let womencategoryImage = document.querySelector("#tshirtW-category");
+
 
 
 let productsheader = document.getElementById("products-header");
@@ -24,12 +23,18 @@ cartButton.addEventListener("click", showCartPopup);
 popupBuyButton.addEventListener("click",addFromPopup);
 
 /* category */
+let allCategory = document.getElementById("all-category");
+let electronicscategory = document.getElementById("electronics-category");
+let womencategory = document.getElementById("tshirtW-category");
+let mencategory = document.getElementById("tShirtM-category");
+let jewelrycategory = document.getElementById("jewelry-category");
 
 
-
-womencategoryImage.addEventListener("click" ,showWomenCategory);
-
+allCategory.addEventListener("click",showAllcategories);
 electronicscategory.addEventListener("click",showElectronicsCategory);
+womencategory.addEventListener("click" ,showWomenCategory);
+mencategory.addEventListener("click", showMenCategory);
+jewelrycategory.addEventListener("click", showJewelryCategory);
 /*category */
 
 
@@ -162,6 +167,31 @@ function addtoTotal(){
   cartPreviewtotal.textContent = "Total: " + sum;
 }
 
+/* visar specifika category */
+function showAllcategories(){
+  productContainer.innerHTML = "";
+  productsheader.innerHTML = "OUR PRODUCTS : ";
+  productContainer.appendChild(productsheader);
+
+  allProducts.forEach(product => {
+    fillProductPage(product);
+  });
+
+}
+
+function showElectronicsCategory(){
+  productContainer.innerHTML = "";
+  productsheader.innerHTML = "ELECTRONICS :";
+  productContainer.appendChild(productsheader);
+
+  allProducts.forEach(product => {
+    if(product.category === "electronics"){
+      fillProductPage(product);
+      }
+
+ });
+}
+
 function showWomenCategory(){
   productContainer.innerHTML = "";
   productsheader.innerHTML = "WOMEN'S CLOTHING :";
@@ -175,18 +205,31 @@ function showWomenCategory(){
   });
 }
 
-function showElectronicsCategory(){
-   productContainer.innerHTML = "";
-   productsheader.innerHTML = "ELECTRONICS :";
-   productContainer.appendChild(productsheader);
+function showMenCategory(){
+  productContainer.innerHTML = "";
+  productsheader.innerHTML = "MEN'S CLOTHING :";
+  productContainer.appendChild(productsheader);
 
-   allProducts.forEach(product => {
-     if(product.category === "electronics"){
-       fillProductPage(product);
-       }
+  allProducts.forEach(product => {
+    if(product.category === "men's clothing"){
+      fillProductPage(product);
+      }
+});
+}
 
+function showJewelryCategory(){
+  productContainer.innerHTML = "";
+  productsheader.innerHTML = "JEWELRY :";
+  productContainer.appendChild(productsheader);
+
+  allProducts.forEach(product => {
+    if(product.category === "jewelery"){
+      fillProductPage(product);
+    }
   });
 }
+
+/* End of visar specifika category */
 
 
 function fillProductPage(product){
