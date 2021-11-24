@@ -22,6 +22,17 @@ cartButton.addEventListener("click", showCartPopup);
 
 popupBuyButton.addEventListener("click",addFromPopup);
 
+/* search bar */
+let searchInput = document.getElementById("searchInput");
+let searchButton = document.querySelector(".searchButton");
+
+
+searchButton.addEventListener("click",() => {
+  searchProduct(searchInput.value);
+});
+
+
+/* search bar */
 /* category */
 let allCategory = document.getElementById("all-category");
 let electronicscategory = document.getElementById("electronics-category");
@@ -29,13 +40,14 @@ let womencategory = document.getElementById("tshirtW-category");
 let mencategory = document.getElementById("tShirtM-category");
 let jewelrycategory = document.getElementById("jewelry-category");
 
-
 allCategory.addEventListener("click",showAllcategories);
 electronicscategory.addEventListener("click",showElectronicsCategory);
 womencategory.addEventListener("click" ,showWomenCategory);
 mencategory.addEventListener("click", showMenCategory);
 jewelrycategory.addEventListener("click", showJewelryCategory);
 /*category */
+
+
 
 
 let cart = [];
@@ -231,6 +243,18 @@ function showJewelryCategory(){
 
 /* End of visar specifika category */
 
+function searchProduct(searchedItem){
+  productContainer.innerHTML = "";
+  productsheader.innerHTML = '"' + searchedItem +'"';
+  productContainer.appendChild(productsheader);
+
+  allProducts.forEach(product => {
+    let productName = product.title.toLowerCase();
+    if(productName.includes(searchedItem)){
+      fillProductPage(product);
+}
+  });
+}
 
 function fillProductPage(product){
   let imgcontainer = document.createElement("div");
@@ -272,6 +296,7 @@ function fillProductPage(product){
           fillPopup(product);
         });
 }
+
 
 
 
