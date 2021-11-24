@@ -136,23 +136,23 @@ function addToCart(product) {
   let image = document.createElement("img");
   let price = document.createElement("p");
   let title = document.createElement("p");
-  let totalPrice = document.createElement("p");
+ 
 
   imgcontainer.className = "cart-container";
   image.className = "cart-image";
   price.className = "cart-price";
   title.className = "cart-title";
-  // totalPrice.className = "cart-totalPrice";
+
 
   image.src = product.image;
   price.textContent = product.price + "$";
   title.textContent = product.title;
 
-  totalPrice.textContent = "Det totala priset är :" + product.price;
+ 
   imgcontainer.appendChild(image);
   imgcontainer.appendChild(title);
   imgcontainer.appendChild(price);
-  imgcontainer.appendChild(totalPrice);
+ 
 
   cartPreview.appendChild(imgcontainer);
 //  let buy = document.querySelector(".buy-button");
