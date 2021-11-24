@@ -11,8 +11,9 @@ let popupBuyButton = document.querySelector(".popup-buy-button");
 let cartButton = document.querySelector(".shoppingcart-button");
 let cartPreview = document.querySelector(".cartPreview");
 let cartPreviewtotal = document.querySelector(".cartPreview-total");
+let electronicscategory = document.querySelector("#electronics-category");
+let womencategoryImage = document.querySelector("#tshirtW-category");
 
-let womencategoryImage = document.querySelector(".tshirtW-category");
 
 let productsheader = document.getElementById("products-header");
 
@@ -22,7 +23,15 @@ cartButton.addEventListener("click", showCartPopup);
 
 popupBuyButton.addEventListener("click",addFromPopup);
 
-womencategoryImage.addEventListener("click",showWomenCategory);
+/* category */
+
+
+
+womencategoryImage.addEventListener("click" ,showWomenCategory);
+
+electronicscategory.addEventListener("click",showElectronicsCategory);
+/*category */
+
 
 let cart = [];
 let allProducts = [];
@@ -162,6 +171,19 @@ function showWomenCategory(){
     if(product.category === "women's clothing"){
       fillProductPage(product);
       }
+
+  });
+}
+
+function showElectronicsCategory(){
+   productContainer.innerHTML = "";
+   productsheader.innerHTML = "ELECTRONICS :";
+   productContainer.appendChild(productsheader);
+
+   allProducts.forEach(product => {
+     if(product.category === "electronics"){
+       fillProductPage(product);
+       }
 
   });
 }
