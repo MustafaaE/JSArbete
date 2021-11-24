@@ -6,19 +6,19 @@ let popupClose = document.querySelector(".popup-closebutton");
 let popupDesc = document.querySelector(".popup-description");
 let popupCategory = document.querySelector(".popup-category");
 let popupRating = document.querySelector(".popup-rating");
-let popupPrice  = document.querySelector(".popup-price");
+let popupPrice = document.querySelector(".popup-price");
 let popupBuyButton = document.querySelector(".popup-buy-button");
 let cartButton = document.querySelector(".shoppingcart-button");
 let cartPreview = document.querySelector(".cartPreview");
+let cartPreviewtotal = document.querySelector(".cartPreview-total");
 
 popupClose.addEventListener("click", closePopup);
 
 cartButton.addEventListener("click", showCartPopup);
 
+popupBuyButton.addEventListener("click",addFromPopup);
 
-let cart =[];
-
-
+let cart = [];
 
 
 fetch("./products.json")
@@ -30,16 +30,14 @@ fetch("./products.json")
   })
   .then((data) => {
     createProducts(data);
-
   })
   .catch((error) => console.log(error));
- 
 
   function createProducts(elements){
       elements.forEach(product => {
         let imgcontainer = document.createElement("div");
         let image = document.createElement("img");
-        let info = document.createElement("a");
+        let info = document.createElement("p");
         let price = document.createElement("p");
         let buyproduct = document.createElement("button");
 
@@ -51,7 +49,6 @@ fetch("./products.json")
 
         image.src = product.image;
         info.textContent = product.title;
-        info.href = "#";
         price.textContent = product.price + "$";
         buyproduct.textContent = "Köp";
 
@@ -65,52 +62,67 @@ fetch("./products.json")
           addToCart(product);
         });
 
-
-
-       image.addEventListener("click", ()=>{
-        showPopup();
-        fillPopup(product);
-       });
+        info.addEventListener("click", () => {
+          showPopup();
+          fillPopup(product);
+        });
+        image.addEventListener("click", ()=>{
+          showPopup();
+          fillPopup(product);
+        });
       });
   }
 
 //  let buy = document.querySelector(".buy-button");
 //  buy.addEventListener("click", test);
- 
 
-
-  function showPopup(){
-   popupContainer.style.visibility = "visible";
-  }
-
-  function fillPopup(test){
+  function fillPopup(test) {
     popupImage.src = test.image;
     popupTitle.textContent = test.title;
     popupDesc.textContent = test.description;
-    popupCategory.textContent = "Category: "+  test.category;
+    popupCategory.textContent = "Category: " + test.category;
     popupRating.textContent = "Rating : " + test.rating.rate + " , " + "Amount left: " + test.rating.count;
-    popupPrice.textContent = "Price: " + test.price + "$";
+    popupPrice.textContent = "Price: $" + test.price;
   }
 
-  function closePopup(){
-    popupContainer.style.visibility = "hidden";
-  }
+function showPopup() {
+  popupContainer.style.visibility = "visible";
+}
 
-  function showCartPopup(){
-    if (cartPreview.style.visibility !== "visible"){
-     return cartPreview.style.visibility = "visible";
-    } else{
-      return cartPreview.style.visibility = "hidden";
-    }
-  }
+function fillPopup(test) {
+  popupImage.src = test.image;
+  popupTitle.textContent = test.title;
+  popupDesc.textContent = test.description;
+  popupCategory.textContent = "Category: " + test.category;
+  popupRating.textContent =
+    "Rating : " +
+    test.rating.rate +
+    " , " +
+    "Amount left: " +
+    test.rating.count;
+  popupPrice.textContent = "Price: " + test.price + "$";
+}
 
-  function addToCart(product){
-    
-    updateCart(product);
-    cart.push(product);
-  }
+function closePopup() {
+  popupContainer.style.visibility = "hidden";
+}
 
-  function updateCart(product){
+function showCartPopup() {
+   if (cartPreview.style.visibility !== "visible") {
+     return (cartPreview.style.visibility = "visible");
+   } else {
+     return (cartPreview.style.visibility = "hidden");
+    }   
+}
+ 
+
+function addToCart(product) {
+  updateCart(product);
+  cart.push(product);
+  addtoTotal();
+}
+
+  function updateCart(product) {
 
     let z = product.id;
     for (let i = 0; i < cart.length; i++) {
@@ -118,39 +130,47 @@ fetch("./products.json")
         if(z=== x){
           return;
         }
-        
     }
-  
 
-    let imgcontainer = document.createElement("div");
-    let image = document.createElement("img");
-    let price = document.createElement("p");
-    let title = document.createElement("p");
-    let totalPrice = document.createElement("p");
-    
-    imgcontainer.className = "cart-container";
-    image.className = "cart-image";
-    price.className = "cart-price";
-    title.className = "cart-title";
-    totalPrice.className = "cart-totalPrice";
+  let imgcontainer = document.createElement("div");
+  let image = document.createElement("img");
+  let price = document.createElement("p");
+  let title = document.createElement("p");
+ 
 
-    image.src = product.image;
-    price.textContent = product.price;
-    title.textContent = product.title;
+  imgcontainer.className = "cart-container";
+  image.className = "cart-image";
+  price.className = "cart-price";
+  title.className = "cart-title";
 
-    totalPrice.textContent = "Det totala priset är :" + product.price;
-    imgcontainer.appendChild(image);
-    imgcontainer.appendChild(title);
-    imgcontainer.appendChild(price);
-    imgcontainer.appendChild(totalPrice);
 
-   cartPreview.appendChild(imgcontainer);
-  
+  image.src = product.image;
+  price.textContent = product.price + "$";
+  title.textContent = product.title;
+
+ 
+  imgcontainer.appendChild(image);
+  imgcontainer.appendChild(title);
+  imgcontainer.appendChild(price);
+ 
+
+  cartPreview.appendChild(imgcontainer);
+//  let buy = document.querySelector(".buy-button");
+//  buy.addEventListener("click", test);
   }
 
+function addFromPopup(){
 
+}
 
-
+function addtoTotal(){
+  let sum = 0;
+  cart.forEach((product) => {
+    sum += product.price;
+    sum.toFixed(2);
+  });
+  cartPreviewtotal.textContent = "Total: " + sum;
+}
 
 /*Hur hemsidan memorerar ens cart när man byter sida.
 
@@ -159,5 +179,3 @@ localStorage.setItem('productcart',JSON.stringify(products)); //spara i lokal da
 let otherProducts = JSON.parse(localStorage.getItem('productcart'));
 
 console.log(otherProducts[0].name); */
-
-
