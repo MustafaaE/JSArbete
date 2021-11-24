@@ -244,13 +244,14 @@ function showJewelryCategory(){
 /* End of visar specifika category */
 
 function searchProduct(searchedItem){
+  let searched = searchedItem.toUpperCase();
   productContainer.innerHTML = "";
-  productsheader.innerHTML = '"' + searchedItem +'"';
+  productsheader.innerHTML = '"' + searchedItem.toUpperCase() +'"';
   productContainer.appendChild(productsheader);
 
   allProducts.forEach(product => {
-    let productName = product.title.toLowerCase();
-    if(productName.includes(searchedItem)){
+    let productName = product.title.toUpperCase();
+    if(productName.includes(searched)){
       fillProductPage(product);
 }
   });
