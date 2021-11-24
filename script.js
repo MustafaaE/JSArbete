@@ -14,6 +14,8 @@ let cartPreviewtotal = document.querySelector(".cartPreview-total");
 
 let womencategoryImage = document.querySelector(".tshirtW-category");
 
+let productsheader = document.getElementById("products-header");
+
 popupClose.addEventListener("click", closePopup);
 
 cartButton.addEventListener("click", showCartPopup);
@@ -51,46 +53,9 @@ fetch("./products.json")
 
   function createProducts(elements){
       elements.forEach(product => {
-        let imgcontainer = document.createElement("div");
-        let image = document.createElement("img");
-        let info = document.createElement("p");
-        let price = document.createElement("p");
-        let buyproduct = document.createElement("button");
-
-        imgcontainer.className = "product-preview";
-        image.className = "product-image";
-        info.className = "product-name";
-        price.className = "product-price";
-        buyproduct.className = "buy-button";
-
-        image.src = product.image;
-        info.textContent = product.title;
-        price.textContent = product.price + "$";
-        buyproduct.textContent = "Köp";
-
-        imgcontainer.appendChild(image);
-        imgcontainer.appendChild(info);
-        imgcontainer.appendChild(price);
-        imgcontainer.appendChild(buyproduct);
-        productContainer.appendChild(imgcontainer);
-
-        buyproduct.addEventListener("click", ()=>{
-          addToCart(product);
-        });
-
-        info.addEventListener("click", () => {
-          showPopup();
-          fillPopup(product);
-        });
-        image.addEventListener("click", ()=>{
-          showPopup();
-          fillPopup(product);
-        });
+        fillProductPage(product);
       });
   }
-
-//  let buy = document.querySelector(".buy-button");
-//  buy.addEventListener("click", test);
 
   function fillPopup(test) {
     popupImage.src = test.image;
@@ -140,10 +105,10 @@ function addToCart(product) {
 
   function updateCart(product) {
 
-    let z = product.id;
+    let textId = product.id;
     for (let i = 0; i < cart.length; i++) {
-      let x = cart[i].id;
-        if(z=== x){
+      let currentId = cart[i].id;
+        if(textId=== currentId){
           return;
         }
     }
@@ -190,10 +155,20 @@ function addtoTotal(){
 
 function showWomenCategory(){
   productContainer.innerHTML = "";
+  productsheader.innerHTML = "WOMEN'S CLOTHING :";
+  productContainer.appendChild(productsheader);
 
   allProducts.forEach(product => {
     if(product.category === "women's clothing"){
-        let imgcontainer = document.createElement("div");
+      fillProductPage(product);
+      }
+
+  });
+}
+
+
+function fillProductPage(product){
+  let imgcontainer = document.createElement("div");
         let image = document.createElement("img");
         let info = document.createElement("p");
         let price = document.createElement("p");
@@ -210,10 +185,13 @@ function showWomenCategory(){
         price.textContent = product.price + "$";
         buyproduct.textContent = "Köp";
 
+
+
         imgcontainer.appendChild(image);
         imgcontainer.appendChild(info);
         imgcontainer.appendChild(price);
         imgcontainer.appendChild(buyproduct);
+        
         productContainer.appendChild(imgcontainer);
         
         buyproduct.addEventListener("click", ()=>{
@@ -228,9 +206,6 @@ function showWomenCategory(){
           showPopup();
           fillPopup(product);
         });
-      }
-
-  });
 }
 
 
