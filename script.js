@@ -12,13 +12,18 @@ let cartButton = document.querySelector(".shoppingcart-button");
 let cartPreview = document.querySelector(".cartPreview");
 let cartPreviewtotal = document.querySelector(".cartPreview-total");
 
+let womencategoryImage = document.querySelector(".tshirtW-category");
+
 popupClose.addEventListener("click", closePopup);
 
 cartButton.addEventListener("click", showCartPopup);
 
 popupBuyButton.addEventListener("click",addFromPopup);
 
+womencategoryImage.addEventListener("click",showWomenCategory);
+
 let cart = [];
+let allProducts = [];
 
 
 fetch("./products.json")
@@ -30,8 +35,19 @@ fetch("./products.json")
   })
   .then((data) => {
     createProducts(data);
+    fillArray(data);
   })
   .catch((error) => console.log(error));
+
+
+
+
+  function fillArray(elements){
+    elements.forEach(product => {
+      allProducts.push(product);
+    });
+    console.log(allProducts);
+  }
 
   function createProducts(elements){
       elements.forEach(product => {
@@ -171,6 +187,53 @@ function addtoTotal(){
   });
   cartPreviewtotal.textContent = "Total: " + sum;
 }
+
+function showWomenCategory(){
+  productContainer.innerHTML = "";
+
+  allProducts.forEach(product => {
+    if(product.category === "women's clothing"){
+        let imgcontainer = document.createElement("div");
+        let image = document.createElement("img");
+        let info = document.createElement("p");
+        let price = document.createElement("p");
+        let buyproduct = document.createElement("button");
+
+        imgcontainer.className = "product-preview";
+        image.className = "product-image";
+        info.className = "product-name";
+        price.className = "product-price";
+        buyproduct.className = "buy-button";
+
+        image.src = product.image;
+        info.textContent = product.title;
+        price.textContent = product.price + "$";
+        buyproduct.textContent = "Köp";
+
+        imgcontainer.appendChild(image);
+        imgcontainer.appendChild(info);
+        imgcontainer.appendChild(price);
+        imgcontainer.appendChild(buyproduct);
+        productContainer.appendChild(imgcontainer);
+        
+        buyproduct.addEventListener("click", ()=>{
+          addToCart(product);
+        });
+
+        info.addEventListener("click", () => {
+          showPopup();
+          fillPopup(product);
+        });
+        image.addEventListener("click", ()=>{
+          showPopup();
+          fillPopup(product);
+        });
+      }
+
+  });
+}
+
+
 
 /*Hur hemsidan memorerar ens cart när man byter sida.
 
