@@ -14,20 +14,17 @@ let cartPreviewtotal = document.querySelector(".cartPreview-total");
 
 let cartPageCheckout = document.querySelector(".cartpage-checkout");
 
-
-
 let productsheader = document.getElementById("products-header");
 
+
+
 popupClose.addEventListener("click", closePopup);
-
 cartButton.addEventListener("click", showCartPopup);
-
 popupBuyButton.addEventListener("click",addFromPopup);
 
 /* search bar */
 let searchInput = document.getElementById("searchInput");
 let searchButton = document.querySelector(".searchButton");
-
 
 searchButton.addEventListener("click",() => {
   searchProduct(searchInput.value);
@@ -253,8 +250,60 @@ function searchProduct(searchedItem){
   });
 }
 
+function changePrice(){
+  let priceSort = document.getElementById("price-sort").value;
+  if(priceSort ==='low'){
+    allProducts.sort(function(a,b){
+      return a.price - b.price;
+    });
+   productContainer.innerHTML = "";
+    productsheader.innerHTML = "LOWEST PRICE FIRST :";
+    productContainer.appendChild(productsheader);
+    allProducts.forEach(product => {
+      fillProductPage(product);
+    });
+  } else if (priceSort === 'high') {
+    allProducts.sort(function(a,b) {
+      return b.price - a.price;
+    });
+    productContainer.innerHTML = "";
+    productsheader.innerHTML = "HIGHEST PRICE FIRST :";
+    productContainer.appendChild(productsheader);
+    allProducts.forEach(product => {
+      fillProductPage(product);
+    });
+    
+  } else {
+    console.log(allProducts);
+    productsheader.innerHTML = "OUR PRODUCTS :";
+    productContainer.innerHTML = "";
+    while(allProducts.length > 0) {
+      allProducts.pop();
+    }
+    fetch("./products.json")
+  .then(function (respons) {
+    console.log(respons); //ska få status 200
+    if (respons.ok) {
+      return respons.json(); //parsea json objektet.
+    }
+  })
+  .then((data) => {
+    createProducts(data);
+    fillArray(data);
+  })
+  .catch((error) => console.log(error));
+
+    console.log(allProducts);
+    productContainer.appendChild(productsheader);
+    allProducts.forEach(product => {
+      fillProductPage(product);
+  });
+}
+}
+
+
 function fillProductPage(product){
-  let imgcontainer = document.createElement("div");
+        let imgcontainer = document.createElement("div");
         let image = document.createElement("img");
         let info = document.createElement("p");
         let price = document.createElement("p");
