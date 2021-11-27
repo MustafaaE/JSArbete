@@ -76,7 +76,6 @@ fetch("./products.json")
     elements.forEach(product => {
       allProducts.push(product);
     });
-    console.log(allProducts);
   }
 
   function createProducts(elements){
@@ -85,14 +84,17 @@ fetch("./products.json")
       });
   }
 
+/* fyller popup med info om produkten */
   function fillPopup(test) {
     popupImage.src = test.image;
+    popupImage.setAttribute('data-attribut', test.id);
     popupTitle.textContent = test.title;
     popupDesc.textContent = test.description;
     popupCategory.textContent = "Category: " + test.category;
     popupRating.textContent = "Rating : " + test.rating.rate + " , " + "Amount left: " + test.rating.count;
     popupPrice.textContent = "Price: $" + test.price;
   }
+/* END fyller popup med info om produkten */
 
 function showPopup() {
   popupContainer.style.visibility = "visible";
@@ -152,17 +154,22 @@ function addToCart(product) {
 
   cartPreview.appendChild(imgcontainer);
  // cartPageCheckout.appendChild(imgcontainer);
-//  let buy = document.querySelector(".buy-button");
-//  buy.addEventListener("click", test);
+
   }
 
 function addFromPopup(){
-
+  let id = Number(popupImage.getAttribute('data-attribut'));
+  console.log(id);
+  allProducts.forEach(x => {
+    if( id === x.id){
+      updateCart(x);
+    }
+  });
 }
 
 function addtoTotal(){
   let sum = 0;
-  cart.forEach((product) => {
+  cart.forEach(product => {
     sum += product.price;
   });
   cartPreviewtotal.textContent = "Total: " +parseFloat(sum).toFixed(2);
