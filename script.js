@@ -162,7 +162,7 @@ function addFromPopup(){
   console.log(id);
   allProducts.forEach(x => {
     if( id === x.id){
-      updateCart(x);
+      addToCart(x);
     }
   });
 }
