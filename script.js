@@ -32,12 +32,14 @@ searchButton.addEventListener("click",() => {
 
 
 /* search bar */
+
 /* category */
 let allCategory = document.getElementById("all-category");
 let electronicscategory = document.getElementById("electronics-category");
 let womencategory = document.getElementById("tshirtW-category");
 let mencategory = document.getElementById("tShirtM-category");
 let jewelrycategory = document.getElementById("jewelry-category");
+let currentcategory = "all";  
 
 allCategory.addEventListener("click",showAllcategories);
 electronicscategory.addEventListener("click",showElectronicsCategory);
@@ -48,9 +50,9 @@ jewelrycategory.addEventListener("click", showJewelryCategory);
 
 
 
-
 let cart = [];
 let allProducts = [];
+let sortedProducts =[];
 
 
 fetch("./products.json")
@@ -174,6 +176,7 @@ function addtoTotal(){
 
 /* visar specifika category */
 function showAllcategories(){
+  document.getElementById("price-sort").value = "relevance";
   productContainer.innerHTML = "";
   productsheader.innerHTML = "OUR PRODUCTS : ";
   productContainer.appendChild(productsheader);
@@ -185,6 +188,8 @@ function showAllcategories(){
 }
 
 function showElectronicsCategory(){
+  document.getElementById("price-sort").value = "relevance";
+  currentcategory = "electronics"; 
   productContainer.innerHTML = "";
   productsheader.innerHTML = "ELECTRONICS :";
   productContainer.appendChild(productsheader);
@@ -198,6 +203,8 @@ function showElectronicsCategory(){
 }
 
 function showWomenCategory(){
+  document.getElementById("price-sort").value = "relevance";
+  currentcategory = "women's clothing"; 
   productContainer.innerHTML = "";
   productsheader.innerHTML = "WOMEN'S CLOTHING :";
   productContainer.appendChild(productsheader);
@@ -211,6 +218,8 @@ function showWomenCategory(){
 }
 
 function showMenCategory(){
+  document.getElementById("price-sort").value = "relevance";
+  currentcategory = "men's clothing"; 
   productContainer.innerHTML = "";
   productsheader.innerHTML = "MEN'S CLOTHING :";
   productContainer.appendChild(productsheader);
@@ -223,6 +232,8 @@ function showMenCategory(){
 }
 
 function showJewelryCategory(){
+  document.getElementById("price-sort").value = "relevance";
+  currentcategory = "jewelery"; 
   productContainer.innerHTML = "";
   productsheader.innerHTML = "JEWELRY :";
   productContainer.appendChild(productsheader);
@@ -252,53 +263,53 @@ function searchProduct(searchedItem){
 
 function changePrice(){
   let priceSort = document.getElementById("price-sort").value;
+
   if(priceSort ==='low'){
-    allProducts.sort(function(a,b){
+  let sorted =  allProducts.slice().sort(function(a,b){
       return a.price - b.price;
     });
-   productContainer.innerHTML = "";
-    productsheader.innerHTML = "LOWEST PRICE FIRST :";
+    productContainer.innerHTML = "";
+    productsheader.innerHTML = "Lowest price for : "+  currentcategory;
     productContainer.appendChild(productsheader);
-    allProducts.forEach(product => {
-      fillProductPage(product);
+    if(currentcategory === "all"){
+      sorted.forEach(x=> {
+         fillProductPage(x);  
+        
+      });
+    } else {
+      sorted.forEach(x=> {
+      if(x.category == currentcategory){
+       fillProductPage(x);  
+      }
     });
+  }
   } else if (priceSort === 'high') {
-    allProducts.sort(function(a,b) {
+    let sorted = allProducts.slice().sort(function(a,b) {
       return b.price - a.price;
     });
     productContainer.innerHTML = "";
-    productsheader.innerHTML = "HIGHEST PRICE FIRST :";
+    productsheader.innerHTML = "Highest price for : " + currentcategory;
     productContainer.appendChild(productsheader);
-    allProducts.forEach(product => {
-      fillProductPage(product);
+    if(currentcategory === "all"){
+      sorted.forEach(x=> {
+         fillProductPage(x);  
+        
+      });
+    } else {
+      sorted.forEach(x=> {
+      if(x.category == currentcategory){
+       fillProductPage(x);  
+      }
     });
-    
+  }
   } else {
-    console.log(allProducts);
     productsheader.innerHTML = "OUR PRODUCTS :";
     productContainer.innerHTML = "";
-    while(allProducts.length > 0) {
-      allProducts.pop();
-    }
-    fetch("./products.json")
-  .then(function (respons) {
-    console.log(respons); //ska få status 200
-    if (respons.ok) {
-      return respons.json(); //parsea json objektet.
-    }
-  })
-  .then((data) => {
-    createProducts(data);
-    fillArray(data);
-  })
-  .catch((error) => console.log(error));
-
-    console.log(allProducts);
     productContainer.appendChild(productsheader);
     allProducts.forEach(product => {
       fillProductPage(product);
   });
-}
+ }
 }
 
 
