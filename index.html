@@ -34,6 +34,7 @@
               <li class="nav-item">
                 <button  type="button" class="shoppingcart-button hidden-sm btn btn-dark" data-toggle="modal" data-target="#Cart">
                   <i class="fa fa-shopping-cart" ></i><a href="#" class="hidden-sm" style="color: #FFFFFF8C">CART</a>
+                  <span class="cart-total-products">(0)</span>
               </button>
               </li>     
       </ul>
@@ -51,29 +52,37 @@
 
 
 
-<img class="blackfridayimage container d-flex justify-content-center pt-3" src="img/black-friday-banner-template_19426-662.jpeg" alt="blackfriday-img">
+<!--<img class="blackfridayimage container d-flex justify-content-center pt-3" src="img/black-friday-banner-template_19426-662.jpeg" alt="blackfriday-img"> -->
 
 
 <div id="index-gallery">
+  <form action="">
+    <label for="price">Sort by </label>
+    <select name = price id="price-sort" onChange="changePrice()">
+      <option value="relevance">Relevance</option>
+      <option value="low">Price: Low to High</option>
+      <option value="high">Price: High to Low </option>
+    </select>
+  </form>
   <div class="item" id="all-category">
-      <img src="img/all-categories.png" alt="All categories" width="160px;" height="160px;" />
+      <img src="img/all-categories.png" alt="All categories" width="100px;" height="100px;" />
       <p>ALL CATEGORIES</p>
   </div>
   <div class="item" id="electronics-category">
-      <img src="img/laptop.png" alt="technics" width="160px;" height="160px;" />
+      <img src="img/laptop.png" alt="technics" width="100px;" height="100px;" />
       <p>ELECTRONICS</p>
   </div>
 
   <div class="item" id="tshirtW-category">
-      <img src="img/tshirt.png" alt="women clothes" width="160px;" height="160px;" />
+      <img src="img/tshirt.png" alt="women clothes" width="100px;" height="100px;" />
       <p>WOMEN'S CLOTHES</p>
   </div>
   <div class="item" id="tShirtM-category">
-      <img  src="img/tshirt.png" alt="men clothes" width="160px;" height="160px;" />
+      <img  src="img/tshirt.png" alt="men clothes" width="100px;" height="100px;" />
       <p>MEN'S CLOTHES</p>
   </div>
   <div class="item" id="jewelry-category">
-      <img src="img/jewelery.jpg" alt="jewelry" width="160px;" height="160px;" />
+      <img src="img/jewelery.jpg" alt="jewelry" width="100px;" height="100px;" />
       <p>JEWELRY</p>
   </div>
 </div>

@@ -1,0 +1,22 @@
+body{
+    display: grid;
+    justify-content: center;
+}
+img{
+    height: 500px;
+    widows: 100%;
+}
+.primaryText{
+    display: flex;
+    justify-content: center;
+    font-size: 2em;
+}
+.secondaryText{
+    display: flex;
+    justify-content: center;
+    font-size: 1em;
+}
+.btnContainer{
+    display: flex;
+    justify-content: center;
+}
