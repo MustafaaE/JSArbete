@@ -146,7 +146,7 @@ p {
 .popupcontainer {
   display: flex;
   justify-self: center;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
   position: fixed;
   background: rgba(255, 255, 255, 0.95);
