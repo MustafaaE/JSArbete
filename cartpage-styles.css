@@ -8,23 +8,32 @@
   display: flex;
   justify-content: space-between;
   position: fixed;
-  background: rgba(236, 70, 70, 0.95);
+  background: rgba(243, 240, 240, 0.95);
   z-index: 2;
-  top: 50%;
+  top: 40%;
   left: 50%;
   width: 40%;
-  height: 50%;
+  height: 40%;
   transform: translate(-50%, -50%);
-  border: solid 1px rgb(226, 174, 174);
-  box-shadow: 1px 1px 1px 1px rgb(202, 170, 170);
+  border: solid 1px rgb(31, 31, 31);
+  box-shadow: 1px 1px 1px 1px rgb(75, 75, 75);
+  border-radius: 8px;
   visibility: hidden;
 }
+
 .order-closebtn {
-  border: 2px solid rgb(31, 29, 29);
-  padding: 5px 5px;
+  border: 1px solid rgb(31, 29, 29);
+  padding: 2px 4px;
   border-radius: 5px;
   margin-bottom: auto;
+  position: absolute;
+  left: 97%;
+  border-radius: 5px;
 }
 .popup-order-confirmed > p {
+  top: 35%;
   font-size: 30px;
+  align-items: center;
+  position: absolute;
+  left: 25%;
 }
