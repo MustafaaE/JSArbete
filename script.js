@@ -16,6 +16,8 @@ let cartPageCheckout = document.querySelector(".cartpage-checkout");
 
 let productsheader = document.getElementById("products-header");
 
+let totalInCart = document.querySelector(".cart-total-products");
+
 popupClose.addEventListener("click", closePopup);
 cartButton.addEventListener("click", showCartPopup);
 popupBuyButton.addEventListener("click", addFromPopup);
@@ -122,8 +124,8 @@ function showCartPopup() {
 
 function addToCart(product) {
   updateCart(product);
-  cart.push(product);
   addtoTotal();
+  updateTotalItems();
   // saveToDatabase(cart);
 }
 
@@ -132,19 +134,39 @@ function updateCart(product) {
   for (let i = 0; i < cart.length; i++) {
     let currentId = cart[i].id;
     if (textId === currentId) {
+      cart.push(product);
+      let change = amount.getAttribute("data-attribut", product.id);
+      amount.innerHTML = getProductAmount(product);
       return;
     }
   }
+  cart.push(product);
+
+  let cartProduct = document.createElement("div");
 
   let imgcontainer = document.createElement("div");
   let image = document.createElement("img");
   let price = document.createElement("p");
   let title = document.createElement("p");
 
-  imgcontainer.className = "cart-container";
+  let cartAmount = document.createElement("div");
+  let decreaseBtn = document.createElement("button");
+  let amount = document.createElement("p");
+  amount.setAttribute("data-attribut", product.id);
+  let increaseBtn = document.createElement("button");
+  let deleteItem = document.createElement("button");
+
+  cartProduct.className = "cart-product";
+  imgcontainer.className = "cart-productInfo";
   image.className = "cart-image";
   price.className = "cart-price";
   title.className = "cart-title";
+
+  cartAmount.className = "cart-amount";
+  decreaseBtn.className = "decrease-amount";
+  amount.className = "in-cart-amount";
+  increaseBtn.className = "increase-amount";
+  deleteItem.className = "delete-item";
 
   image.src = product.image;
   price.textContent = product.price + "$";
@@ -154,7 +176,16 @@ function updateCart(product) {
   imgcontainer.appendChild(title);
   imgcontainer.appendChild(price);
 
-  cartPreview.appendChild(imgcontainer);
+  amount.innerHTML = getProductAmount(product);
+
+  cartAmount.appendChild(decreaseBtn);
+  cartAmount.appendChild(amount);
+  cartAmount.appendChild(increaseBtn);
+  cartAmount.appendChild(deleteItem);
+
+  cartProduct.appendChild(imgcontainer);
+  cartProduct.appendChild(cartAmount);
+  cartPreview.appendChild(cartProduct);
   // cartPageCheckout.appendChild(imgcontainer);
 }
 
@@ -181,6 +212,7 @@ function addtoTotal() {
 /* visar specifika category */
 function showAllcategories() {
   document.getElementById("price-sort").value = "relevance";
+  currentcategory = "all";
   productContainer.innerHTML = "";
   productsheader.innerHTML = "OUR PRODUCTS : ";
   productContainer.appendChild(productsheader);
@@ -305,9 +337,17 @@ function changePrice() {
     productsheader.innerHTML = "OUR PRODUCTS :";
     productContainer.innerHTML = "";
     productContainer.appendChild(productsheader);
-    allProducts.forEach((product) => {
-      fillProductPage(product);
-    });
+    if (currentcategory === "all") {
+      allProducts.forEach((x) => {
+        fillProductPage(x);
+      });
+    } else {
+      allProducts.forEach((x) => {
+        if (x.category === currentcategory) {
+          fillProductPage(x);
+        }
+      });
+    }
   }
 }
 
@@ -324,21 +364,59 @@ function fillProductPage(product) {
   price.className = "product-price";
   buyproduct.className = "buy-button";
 
-  image.src = product.image;
-  info.textContent = product.title;
-  price.textContent = product.price + "$";
-  buyproduct.textContent = "Köp";
+  function updateTotalItems() {
+    totalInCart.innerHTML = "(" + cart.length + ")";
+  }
 
-  imgcontainer.appendChild(image);
-  imgcontainer.appendChild(info);
-  imgcontainer.appendChild(price);
-  imgcontainer.appendChild(buyproduct);
+  function fillProductPage(product) {
+    let imgcontainer = document.createElement("div");
+    let image = document.createElement("img");
+    let info = document.createElement("p");
+    let price = document.createElement("p");
+    let buyproduct = document.createElement("button");
 
-  productContainer.appendChild(imgcontainer);
+    imgcontainer.className = "product-preview";
+    image.className = "product-image";
+    info.className = "product-name";
+    price.className = "product-price";
+    buyproduct.className = "buy-button";
 
-  buyproduct.addEventListener("click", () => {
-    addToCart(product);
-  });
+    image.src = product.image;
+    info.textContent = product.title;
+    price.textContent = product.price + "$";
+    buyproduct.textContent = "Köp";
+
+    imgcontainer.appendChild(image);
+    imgcontainer.appendChild(info);
+    imgcontainer.appendChild(price);
+    imgcontainer.appendChild(buyproduct);
+
+    productContainer.appendChild(imgcontainer);
+
+    buyproduct.addEventListener("click", () => {
+      addToCart(product);
+    });
+
+    info.addEventListener("click", () => {
+      showPopup();
+      fillPopup(product);
+    });
+    image.addEventListener("click", () => {
+      showPopup();
+      fillPopup(product);
+    });
+  }
+
+  function getProductAmount(item) {
+    let sum = 0;
+    cart.forEach((x) => {
+      let y = x.id;
+      if (item.id === y) {
+        sum++;
+      }
+    });
+    return sum;
+  }
 
   info.addEventListener("click", () => {
     showPopup();
