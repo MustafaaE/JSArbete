@@ -3,3 +3,28 @@
 }
 .cartpage-checkout {
 }
+
+.popup-order-confirmed {
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  background: rgba(236, 70, 70, 0.95);
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  width: 40%;
+  height: 50%;
+  transform: translate(-50%, -50%);
+  border: solid 1px rgb(226, 174, 174);
+  box-shadow: 1px 1px 1px 1px rgb(202, 170, 170);
+  visibility: hidden;
+}
+.order-closebtn {
+  border: 2px solid rgb(31, 29, 29);
+  padding: 5px 5px;
+  border-radius: 5px;
+  margin-bottom: auto;
+}
+.popup-order-confirmed > p {
+  font-size: 30px;
+}
