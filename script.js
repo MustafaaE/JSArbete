@@ -130,6 +130,7 @@ function addToCart(product) {
 }
 
 function updateCart(product) {
+
   let textId = product.id;
   for (let i = 0; i < cart.length; i++) {
     let currentId = cart[i].id;
@@ -151,7 +152,7 @@ function updateCart(product) {
 
   let cartAmount = document.createElement("div");
   let decreaseBtn = document.createElement("button");
-  let amount = document.createElement("p");
+  //let amount = document.createElement("p");
   amount.setAttribute("data-attribut", product.id);
   let increaseBtn = document.createElement("button");
   let deleteItem = document.createElement("button");
@@ -176,7 +177,7 @@ function updateCart(product) {
   imgcontainer.appendChild(title);
   imgcontainer.appendChild(price);
 
-  amount.innerHTML = getProductAmount(product);
+  //amount.innerHTML = getProductAmount(product);
 
   cartAmount.appendChild(decreaseBtn);
   cartAmount.appendChild(amount);
@@ -351,19 +352,6 @@ function changePrice() {
   }
 }
 
-function fillProductPage(product) {
-  let imgcontainer = document.createElement("div");
-  let image = document.createElement("img");
-  let info = document.createElement("p");
-  let price = document.createElement("p");
-  let buyproduct = document.createElement("button");
-
-  imgcontainer.className = "product-preview";
-  image.className = "product-image";
-  info.className = "product-name";
-  price.className = "product-price";
-  buyproduct.className = "buy-button";
-
   function updateTotalItems() {
     totalInCart.innerHTML = "(" + cart.length + ")";
   }
@@ -427,8 +415,6 @@ function fillProductPage(product) {
     fillPopup(product);
   });
 
-  productContainer.appendChild(imgcontainer);
-
   buyproduct.addEventListener("click", () => {
     addToCart(product);
   });
@@ -441,7 +427,6 @@ function fillProductPage(product) {
     showPopup();
     fillPopup(product);
   });
-}
 
 //Hur hemsidan memorerar ens cart när man byter sida.
 
