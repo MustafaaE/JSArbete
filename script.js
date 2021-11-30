@@ -174,17 +174,28 @@ function updateCart(product) {
 
   decreaseBtn.addEventListener("click",function(){
     let searched = Number(amount.getAttribute("data-cart"));
+    console.log(searched);
+    let i =0;
     if(amount.innerHTML == 0) {
       amount.style.background = "red";
     } else {
-      let firstInstance = cart.indexOf(searched);
-      cart.splice(firstInstance,1);
-      addtoTotal();
+      // let firstInstance = cart.id.indexOf(searched);
+      // console.log(cart.id.indexOf(searched));
+      // cart.splice(firstInstance,1);
+      while(i < cart.length){
+        if(searched === cart[i].id){
+        cart.splice(i,1);
+        break;
+        } else {
+          i++;
+        }
+    }
+    addtoTotal();
       updateTotalItems();
       amount.innerHTML--;
-    }
     console.log(cart);
-  });
+  }
+});
 
   increaseBtn.addEventListener("click",() =>{
     cart.push(product);
