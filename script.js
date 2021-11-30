@@ -109,6 +109,7 @@ function addToCart(product) {
   updateCart(product);
   addtoTotal();
   updateTotalItems();
+
   // saveToDatabase(cart);
 }
 
@@ -119,8 +120,6 @@ function updateCart(product) {
     let currentId = cart[i].id;
     if (textId === currentId) {
       cart.push(product);
-      //let change = amount.getAttribute("data-attribut", product.id);
-     // amount.innerHTML = getProductAmount(product);
       return;
     }
   }
@@ -130,13 +129,14 @@ function updateCart(product) {
 
   let imgcontainer = document.createElement("div");
   let image = document.createElement("img");
+  image.setAttribute("data-test", "hello");
   let price = document.createElement("p");
   let title = document.createElement("p");
 
   let cartAmount = document.createElement("div");
   let decreaseBtn = document.createElement("button");
-  //let amount = document.createElement("p");
-  //amount.setAttribute("data-attribut", product.id);
+  let amount = document.createElement("p");
+  amount.setAttribute("data-cart", product.id);
   let increaseBtn = document.createElement("button");
   let deleteItem = document.createElement("button");
 
@@ -148,10 +148,14 @@ function updateCart(product) {
 
   cartAmount.className = "cart-amount";
   decreaseBtn.className = "decrease-amount";
-  //amount.className = "in-cart-amount";
+  amount.className = "in-cart-amount";
   increaseBtn.className = "increase-amount";
-  deleteItem.className = "delete-item";
+  deleteItem.className = "cart-delete-item";
 
+  decreaseBtn.innerHTML = "-";
+  increaseBtn.innerHTML = "+";
+  deleteItem.innerHTML = "delete";  
+  amount.innerHTML = parseInt(1);
   image.src = product.image;
   price.textContent = product.price + "$";
   title.textContent = product.title;
@@ -160,18 +164,60 @@ function updateCart(product) {
   imgcontainer.appendChild(title);
   imgcontainer.appendChild(price);
 
-  //amount.innerHTML = getProductAmount(product);
-
   cartAmount.appendChild(decreaseBtn);
- // cartAmount.appendChild(amount);
+  cartAmount.appendChild(amount);
   cartAmount.appendChild(increaseBtn);
   cartAmount.appendChild(deleteItem);
 
   cartProduct.appendChild(imgcontainer);
   cartProduct.appendChild(cartAmount);
   cartPreview.appendChild(cartProduct);
+
+  decreaseBtn.addEventListener("click",function(){
+    let searched = Number(amount.getAttribute("data-cart"));
+    if(amount.innerHTML == 0) {
+      amount.style.background = "red";
+    } else {
+      let firstInstance = cart.indexOf(searched);
+      cart.splice(firstInstance,1);
+      addtoTotal();
+      updateTotalItems();
+        
+      amount.innerHTML--;
+    }
+    console.log(cart);
+  });
+
+  increaseBtn.addEventListener("click",() =>{
+    addToCart(product);
+    amount.innerHTML++;
+    amount.style.background = "white";
+  });
+
+  deleteItem.addEventListener("click",function() {
+    let searched = Number(amount.getAttribute("data-cart"));
+    let i = 0;
+    while(i < cart.length){
+      if(searched === cart[i].id){
+        cart.splice(i,1);
+      } else {
+        i++;
+      }
+    }
+    amount.parentNode.parentNode.remove();
+    addtoTotal();
+    updateTotalItems();
+  });
+
   // cartPageCheckout.appendChild(imgcontainer);
 }
+
+// function decreaseAmount(e){
+//   // let x = document.querySelector(".in-cart-amount").getAttribute("data-cart");
+
+//   let x = e.target.dataset.cart;
+//   console.log(x);
+// }
 
 function addFromPopup() {
   let id = Number(popupImage.getAttribute("data-attribut"));
@@ -189,7 +235,7 @@ function addtoTotal() {
   cart.forEach((product) => {
     sum += product.price;
   });
-  cartPreviewtotal.textContent = "Total: " + parseFloat(sum).toFixed(2);
+  cartPreviewtotal.textContent = "Total: " + parseFloat(sum).toFixed(2) + "$";
 }
 
 /* visar specifika category */
@@ -365,6 +411,7 @@ function changePrice() {
 
     buyproduct.addEventListener("click", () => {
       addToCart(product);
+      updateNumber(product);
     });
 
     info.addEventListener("click", () => {
@@ -377,16 +424,17 @@ function changePrice() {
     });
   }
 
-  function getProductAmount(item) {
-    let sum = 0;
-    cart.forEach((x) => {
-      let y = x.id;
-      if (item.id === y) {
-        sum++;
-      }
-    });
-    return sum;
-  }
+  // function getProductAmount(item) {
+  //   let sum = 0;
+  //   cart.forEach((x) => {
+  //     let y = x.id;
+  //     if (item.id === y) {
+  //       sum++;
+  //     }
+  //   });
+  //   return sum;
+  // }
+
 
 
 //Hur hemsidan memorerar ens cart när man byter sida.

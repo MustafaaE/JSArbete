@@ -103,6 +103,11 @@ body {
 .cart-amount {
  display: flex;
  flex-direction: row;
+ justify-content: end;
+}
+.in-cart-amount{
+  margin: 0;
+  font-size: 20px;
 }
 
 
