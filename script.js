@@ -129,7 +129,6 @@ function updateCart(product) {
 
   let imgcontainer = document.createElement("div");
   let image = document.createElement("img");
-  image.setAttribute("data-test", "hello");
   let price = document.createElement("p");
   let title = document.createElement("p");
 
@@ -182,14 +181,15 @@ function updateCart(product) {
       cart.splice(firstInstance,1);
       addtoTotal();
       updateTotalItems();
-        
       amount.innerHTML--;
     }
     console.log(cart);
   });
 
   increaseBtn.addEventListener("click",() =>{
-    addToCart(product);
+    cart.push(product);
+    addtoTotal();
+    updateTotalItems();
     amount.innerHTML++;
     amount.style.background = "white";
   });
@@ -435,6 +435,9 @@ function changePrice() {
   //   return sum;
   // }
 
+  function updateNumber(product){
+
+  }
 
 
 //Hur hemsidan memorerar ens cart när man byter sida.
