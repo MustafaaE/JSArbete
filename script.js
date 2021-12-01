@@ -466,16 +466,10 @@ function updateNumber(product) {
   // console.log(id);
   for (let i = 0; i < ptagg.length; i++) {
     if (Number(ptagg[i].dataset.cart)=== id) {
-      console.log("test");
-      console.log(Number(ptagg[i].dataset.cart));
       ptagg[i].innerHTML++;
-      console.log(ptagg);
-    } else {
-      console.log(Number(ptagg[i].dataset.cart));
-    }
+    } 
   }
  
-  
 }
 
 //Hur hemsidan memorerar ens cart när man byter sida.
