@@ -18,6 +18,10 @@ let productsheader = document.getElementById("products-header");
 
 let totalInCart = document.querySelector(".cart-total-products");
 
+let gotoCart = document.querySelector(".cartPreview-btn");
+gotoCart.addEventListener("click",()=>{
+saveToDatabase();
+});
 let cart = [];
 let allProducts = [];
 let sortedProducts = [];
@@ -278,7 +282,7 @@ function addToCart(product) {
   updateCart(product);
   addtoTotal();
   updateTotalItems();
-  // saveToDatabase(cart);
+ // saveToDatabase(cart);
 }
 
 function updateCart(product) {
@@ -472,15 +476,18 @@ function updateNumber(product) {
  
 }
 
-//Hur hemsidan memorerar ens cart när man byter sida.
+// Hur hemsidan memorerar ens cart när man byter sida.
 
-// function saveToDatabase(cart){
+function saveToDatabase(){
 
-// localStorage.setItem('cartSaved',JSON.stringify(cart)); //spara i lokal databas
+localStorage.setItem('cartSaved',JSON.stringify(cart)); //spara i lokal databas
 
-// let otherProducts = JSON.parse(localStorage.getItem('cartSaved'));
+cart.forEach((product) =>{
+  addToCart(product);
+});
+//let otherProducts = JSON.parse(localStorage.getItem('cartSaved'));
 
-// //addToCart(otherProducts);
+//addToCart(otherProducts);
 
 // console.log(otherProducts.title);
-// }
+}

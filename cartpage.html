@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="contact-style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         crossorigin="anonymous">
+    <script src="script.js" defer></script>  
     <title>Cart Page</title>
 </head>
 <body>
@@ -37,9 +38,9 @@
         </nav>
     </header>
 
-    <div class="cartpage-checkout">
-
-
+    <div class="cartPreview-checkout">
+        <div class="cartPreview"></div> 
+        <button class ="cartPreview-btn">Visa Varukorg</button>
         <button class="order-btn">Beställ</button>
     </div>
 
@@ -49,6 +50,15 @@
         <button class="order-closebtn">X</button> 
       
     </div>
+    <div class ="cartPreview">
+
+        <div class="cartPreview-checkout">
+          <p class="cartPreview-total"> 0.00$</p>
+          <button class="cartPreview-deleteAll">Töm Varukorgen</button>
+          <button class="cartPreview-btn"> <a href="cartpage.html">Till Kassan</a></button>
+        </div>
+      
+      </div>
     <script src="cartpagescript.js"></script>    
 </body>
 </html>

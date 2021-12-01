@@ -130,6 +130,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 p {
@@ -242,6 +243,9 @@ footer {
 .ggg {
   text-align: center;
   padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
 .allrights {

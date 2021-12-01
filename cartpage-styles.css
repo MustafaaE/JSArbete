@@ -37,3 +37,20 @@
   position: absolute;
   left: 25%;
 }
+.cartPreview {
+  display: flex;
+  justify-self: center;
+  flex-direction: column;
+  position: fixed;
+  background: rgba(255, 255, 255, 0.95);
+  visibility: hidden;
+  z-index: 5;
+  /* top: 32%;
+  left: 100%;
+  width: 33%;
+  height: 55%;
+  transform: translate(-101%, -50%); */
+  border: solid 1px black;
+  box-shadow: 1px 1px 1px 1px black;
+  overflow-y: scroll;
+}
