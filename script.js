@@ -256,9 +256,6 @@ function fillPopup(test) {
   popupBuyButton.addEventListener("click", () =>{
     addToCart(test);
     updateNumber(test);
-    console.log("början");
-    console.log(test);
-    console.log("slutet");
   });
 
 }
