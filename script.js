@@ -152,7 +152,7 @@ deleteCart.addEventListener("click", () => {
 
 popupClose.addEventListener("click", closePopup);
 cartButton.addEventListener("click", showCartPopup);
-popupBuyButton.addEventListener("click", addFromPopup);
+// popupBuyButton.addEventListener("click", addFromPopup);
 
 /* search bar */
 let searchInput = document.getElementById("searchInput");
@@ -249,6 +249,12 @@ function fillPopup(test) {
     "Amount left: " +
     test.rating.count;
   popupPrice.textContent = "Price: $" + test.price;
+  popupBuyButton.addEventListener("click", () =>{
+    addToCart(test);
+    updateNumber(test);
+
+  });
+  
 }
 /* END fyller popup med info om produkten */
 
@@ -335,7 +341,6 @@ function updateCart(product) {
 
   decreaseBtn.addEventListener("click", function () {
     let searched = Number(amount.getAttribute("data-cart"));
-    console.log(searched);
     let i = 0;
     if (amount.innerHTML == 0) {
       amount.style.background = "red";
@@ -454,23 +459,24 @@ function fillProductPage(product) {
   });
 }
 
-// function updateNumber(product) {
-//   let id = product.id;
-//   let ptagg = document.querySelector(".in-cart-amount");
-//   let cartnbr = Number(ptagg.dataset.cart);
-//   // console.log(Number(ptagg.dataset.cart));
-//   // console.log(id);
-//   for (let i = 0; i < ptagg.length; i++) {
-//     if (cartnbr === id) {
-//       console.log("test");
-//       console.log(Number(ptagg.dataset.cart));
-//       ptagg.innerHTML++;
-//       console.log(ptagg);
-//     }
-//   }
-//   console.log(Number(ptagg.dataset.cart));
+function updateNumber(product) {
+  let id = product.id;
+  let ptagg = document.getElementsByClassName("in-cart-amount");
+  // console.log(Number(ptagg.dataset.cart));
+  // console.log(id);
+  for (let i = 0; i < ptagg.length; i++) {
+    if (Number(ptagg[i].dataset.cart)=== id) {
+      console.log("test");
+      console.log(Number(ptagg[i].dataset.cart));
+      ptagg[i].innerHTML++;
+      console.log(ptagg);
+    } else {
+      console.log(Number(ptagg[i].dataset.cart));
+    }
+  }
+ 
   
-// }
+}
 
 //Hur hemsidan memorerar ens cart när man byter sida.
 
