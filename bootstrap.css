@@ -9,8 +9,6 @@ body {
 
 /*NAVBAR*/
 
-.navbar {
-}
 .navbar a:hover {
   color: white;
 }
@@ -212,7 +210,7 @@ p {
 footer {
   text-align: center;
   padding: 0px;
-  height: 180px;
+  height: 100px;
 }
 
 footer p {
