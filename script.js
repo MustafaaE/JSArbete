@@ -1,13 +1,14 @@
 let productContainer = document.querySelector(".products-container");
 let popupContainer = document.querySelector(".popupcontainer");
 let popupImage = document.querySelector(".popup-image");
+let popupImageContainer = document
 let popupTitle = document.querySelector(".popup-title");
 let popupClose = document.querySelector(".popup-closebutton");
 let popupDesc = document.querySelector(".popup-description");
 let popupCategory = document.querySelector(".popup-category");
 let popupRating = document.querySelector(".popup-rating");
 let popupPrice = document.querySelector(".popup-price");
-let popupBuyButton = document.querySelector(".popup-buy-button");
+// let popupBuyButton = document.querySelector(".popup-buy-button");
 let cartButton = document.querySelector(".shoppingcart-button");
 let cartPreview = document.querySelector(".cartPreview");
 let cartPreviewtotal = document.querySelector(".cartPreview-total");
@@ -17,11 +18,9 @@ let cartPageCheckout = document.querySelector(".cartpage-checkout");
 let productsheader = document.getElementById("products-header");
 
 let totalInCart = document.querySelector(".cart-total-products");
+let popupBuyButton = document.createElement("button");
+let popupfooter = document.querySelector(".popup-footer");
 
-let gotoCart = document.querySelector(".cartPreview-btn");
-gotoCart.addEventListener("click",()=>{
-saveToDatabase();
-});
 let cart = [];
 let allProducts = [];
 let sortedProducts = [];
@@ -88,7 +87,6 @@ function showElectronicsCategory() {
   productContainer.innerHTML = "";
   productsheader.innerHTML = "ELECTRONICS :";
   productContainer.appendChild(productsheader);
-
   allProducts.forEach((product) => {
     if (product.category === "electronics") {
       fillProductPage(product);
@@ -242,23 +240,27 @@ function changePrice() {
 
 /* fyller popup med info om produkten */
 function fillPopup(test) {
+  if(document.contains(document.querySelector(".popup-buy-button"))){
+    document.querySelector(".popup-buy-button").remove();
+  }
+  let popupBuyButton = document.createElement("button");
+  popupBuyButton.className = "popup-buy-button";
+  popupBuyButton.innerHTML = "Köp";
   popupImage.src = test.image;
   popupTitle.textContent = test.title;
   popupDesc.textContent = test.description;
   popupCategory.textContent = "Category: " + test.category;
-  popupRating.textContent =
-    "Rating : " +
-    test.rating.rate +
-    " , " +
-    "Amount left: " +
-    test.rating.count;
+  popupRating.textContent = "Rating : " + test.rating.rate + " , " + "Amount left: " + test.rating.count;
   popupPrice.textContent = "Price: $" + test.price;
+  popupfooter.appendChild(popupBuyButton);
   popupBuyButton.addEventListener("click", () =>{
     addToCart(test);
     updateNumber(test);
-
+    console.log("början");
+    console.log(test);
+    console.log("slutet");
   });
-  
+
 }
 /* END fyller popup med info om produkten */
 
@@ -268,6 +270,7 @@ function showPopup() {
 
 function closePopup() {
   popupContainer.style.visibility = "hidden";
+
 }
 
 function showCartPopup() {
@@ -456,6 +459,7 @@ function fillProductPage(product) {
   info.addEventListener("click", () => {
     showPopup();
     fillPopup(product);
+    console.log("test");
   });
   image.addEventListener("click", () => {
     showPopup();
@@ -478,16 +482,21 @@ function updateNumber(product) {
 
 // Hur hemsidan memorerar ens cart när man byter sida.
 
-function saveToDatabase(){
+// function saveToDatabase(){
 
-localStorage.setItem('cartSaved',JSON.stringify(cart)); //spara i lokal databas
+// localStorage.setItem('cartSaved',JSON.stringify(cart)); //spara i lokal databas
 
-cart.forEach((product) =>{
-  addToCart(product);
-});
-//let otherProducts = JSON.parse(localStorage.getItem('cartSaved'));
+// cart.forEach((product) =>{
+//   addToCart(product);
+// });
+// //let otherProducts = JSON.parse(localStorage.getItem('cartSaved'));
 
-//addToCart(otherProducts);
+// //addToCart(otherProducts);
 
-// console.log(otherProducts.title);
-}
+// // console.log(otherProducts.title);
+// }
+
+// let gotoCart = document.querySelector(".cartPreview-btn");
+// gotoCart.addEventListener("click",()=>{
+// saveToDatabase();
+// });
