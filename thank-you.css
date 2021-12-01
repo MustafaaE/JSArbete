@@ -1,17 +1,11 @@
-body {
-  display: grid;
-  justify-content: center;
-}
 img {
   height: 500px;
   widows: 100%;
 }
-
-#nav-link-webname {
-  font-size: 2em;
-  font-weight: bold;
+.imageContainer{
+  display: flex;
+  justify-content: center;
 }
-
 .primaryText {
   display: flex;
   justify-content: center;

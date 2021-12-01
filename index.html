@@ -1,138 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RANDOM WEBSHOP</title>
-    <script src="script.js" defer></script>
-    <link rel="stylesheet" href="bootstrap.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="our-products-style.css">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RANDOM WEBSHOP</title>
+  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="bootstrap.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="our-products-style.css">
 </head>
+
 <body>
 
- <!-- Header -->
- <header>
-  <nav class="navbar bg-dark navbar-dark" id="navbar">
-    <li class="nav-item-home">
-      <a class="nav-link" id="nav-link-webname" href="index.html">ALL AROUND</a>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" id="searchInput" type="text" placeholder="Search" aria-label="Search">
-        <button class="searchButton btn btn-outline-light my-2 my-sm-0" type="button">Search</button>
-    </form>
-    </li>
-   
+  <!-- Header -->
+  <header>
+    <nav class="navbar bg-dark navbar-dark" id="navbar">
+      <li class="nav-item-home">
+        <a class="nav-link" id="nav-link-webname" href="index.html">ALL AROUND</a>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" id="searchInput" type="text" placeholder="Search" aria-label="Search">
+          <button class="searchButton btn btn-outline-light my-2 my-sm-0" type="button">Search</button>
+        </form>
+      </li>
+
       <ul class="navbar-nav list-group-horizontal justify-content-end">
-              <li class="nav-item">
-                <a class="nav-link" href="about.html" >ABOUT</a>
-              </li>
-              <!-- ADDED NEW NAVIGATION TO CONTACT -->
-              <li class="nav-item">
-                <a class ="nav-link" href="contact.html">CONTACT</a>
-              </li>
-              <li class="nav-item">
-                <button  type="button" class="shoppingcart-button hidden-sm btn btn-dark" data-toggle="modal" data-target="#Cart">
-                  <i class="fa fa-shopping-cart" ></i><a href="#" class="hidden-sm" style="color: #FFFFFF8C">CART</a>
-                  <span class="cart-total-products">(0)</span>
-              </button>
-              </li>     
+        <li class="nav-item">
+          <a class="nav-link" href="about.html">ABOUT</a>
+        </li>
+        <!-- ADDED NEW NAVIGATION TO CONTACT -->
+        <li class="nav-item">
+          <a class="nav-link" href="contact.html">CONTACT</a>
+        </li>
+        <li class="nav-item">
+          <button type="button" class="shoppingcart-button hidden-sm btn btn-dark" data-toggle="modal" data-target="#Cart">
+            <i class="fa fa-shopping-cart"></i><a href="#" class="hidden-sm" style="color: #FFFFFF8C">CART</a>
+            <span class="cart-total-products">(0)</span>
+          </button>
+        </li>
       </ul>
-  </nav>
-  </header> 
-<!-- /Header -->
+    </nav>
+  </header>
+  <!-- /Header -->
 
-<div class ="cartPreview">
+  <div class="cartPreview">
 
-  <div class="cartPreview-checkout">
-    <p class="cartPreview-total"> 0.00$</p>
-    <button class="cartPreview-deleteAll">Töm Varukorgen</button>
-    <button class="cartPreview-btn"> <a href="cartpage.html">Till Kassan</a></button>
+    <div class="cartPreview-checkout">
+      <p class="cartPreview-total"> 0.00$</p>
+      <button class="cartPreview-deleteAll">Töm Varukorgen</button>
+      <button class="cartPreview-btn"> <a href="cartpage.html">Till Kassan</a></button>
+    </div>
+
   </div>
 
-</div>
 
 
+  <!--<img class="blackfridayimage container d-flex justify-content-center pt-3" src="img/black-friday-banner-template_19426-662.jpeg" alt="blackfriday-img"> -->
 
-<!--<img class="blackfridayimage container d-flex justify-content-center pt-3" src="img/black-friday-banner-template_19426-662.jpeg" alt="blackfriday-img"> -->
 
-
-<div id="index-gallery">
-  <form action="">
-    <label for="price">Sort by </label>
-    <select name = price id="price-sort" onChange="changePrice()">
-      <option value="relevance">Relevance</option>
-      <option value="low">Price: Low to High</option>
-      <option value="high">Price: High to Low </option>
-    </select>
-  </form>
-  <div class="item" id="all-category">
+  <div id="index-gallery">
+    <form action="">
+      <label for="price">Sort by </label>
+      <select name=p rice id="price-sort" onChange="changePrice()">
+        <option value="relevance">Relevance</option>
+        <option value="low">Price: Low to High</option>
+        <option value="high">Price: High to Low </option>
+      </select>
+    </form>
+    <div class="item" id="all-category">
       <img src="img/all-categories.png" alt="All categories" width="100px;" height="100px;" />
       <p>ALL CATEGORIES</p>
-  </div>
-  <div class="item" id="electronics-category">
-      <img src="img/laptop.png" alt="technics" width="100px;" height="100px;"  />
+    </div>
+    <div class="item" id="electronics-category">
+      <img src="img/laptop.png" alt="technics" width="100px;" height="100px;" />
       <p>ELECTRONICS</p>
-  </div>
+    </div>
 
-  <div class="item" id="tshirtW-category">
+    <div class="item" id="tshirtW-category">
       <img src="img/tshirt.png" alt="women clothes" width="100px;" height="100px;" />
       <p>WOMEN'S CLOTHES</p>
-  </div>
-  <div class="item" id="tShirtM-category">
-      <img  src="img/tshirt.png" alt="men clothes" width="100px;" height="100px;" />
+    </div>
+    <div class="item" id="tShirtM-category">
+      <img src="img/tshirt.png" alt="men clothes" width="100px;" height="100px;" />
       <p>MEN'S CLOTHES</p>
-  </div>
-  <div class="item" id="jewelry-category">
+    </div>
+    <div class="item" id="jewelry-category">
       <img src="img/jewelery.jpg" alt="jewelry" width="100px;" height="100px;" />
       <p>JEWELRY</p>
+    </div>
   </div>
-</div>
 
-<!--<div class="container-bestproducts">
+  <!--<div class="container-bestproducts">
   <h3>BEST PRODUCTS:</h3>
 </div> -->
 
-<div class="products-container">
-  <h3 id="products-header">OUR PRODUCTS :</h3>
-  <!-- Products are appended with javascript in script.js -->
-</div>
-
-
-<div class="popupcontainer" id="popup">
-  <div class="popup-topbar">
-    <p class="popup-title"> </p>
-    <button class="popup-closebutton">X</button>
-
-  </div>
-
-  <div class="popup-imageContainer">
-    <img class="popup-image" width="350px" height="400px">
-    <p class="popup-description"></p>
+  <div class="products-container">
+    <h3 id="products-header">OUR PRODUCTS :</h3>
+    <!-- Products are appended with javascript in script.js -->
   </div>
 
 
-  <div class="popup-footer">
-    <p class="popup-category"></p>
-    <p class="popup-rating"></p>
-    <p class="popup-price"></p>
-    <button class="popup-buy-button">Köp</button>
+  <div class="popupcontainer" id="popup">
+    <div class="popup-topbar">
+      <p class="popup-title"> </p>
+      <button class="popup-closebutton">X</button>
+
+    </div>
+
+    <div class="popup-imageContainer">
+      <img class="popup-image" width="350px" height="400px">
+      <p class="popup-description"></p>
+    </div>
+
+
+    <div class="popup-footer">
+      <p class="popup-category"></p>
+      <p class="popup-rating"></p>
+      <p class="popup-price"></p>
+      <button class="popup-buy-button">Köp</button>
+    </div>
+
+
   </div>
 
-
-</div>
-
-<footer class="container-fluid bg-dark ftr1">
-  <div class="linksimg ">
+  <footer class="container-fluid bg-dark ftr1">
+    <div class="linksimg ">
       <div class="ggg">
-          <li class="footerlinks"><a  href="index.html">HOME</a></li>
-          <li class="footerlinks"><a  href="about.html">ABOUT</a></li>  
-          <li class="footerlinks"><a  href="contact.html">CONTACT</a></li>  
+        <li class="footerlinks"><a href="index.html">HOME</a></li>
+        <li class="footerlinks"><a href="about.html">ABOUT</a></li>
+        <li class="footerlinks"><a href="contact.html">CONTACT</a></li>
       </div>
-  
-  </div>   
- 
-</footer>
+
+    </div>
+
+  </footer>
 
 </body>
+
 </html>
