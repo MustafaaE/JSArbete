@@ -1,6 +1,11 @@
+
+.nav-item {
+  padding: 5px;
+}
+
 img {
-  height: 500px;
-  widows: 100%;
+  height: 100%;
+  width: 500px;
 }
 .imageContainer{
   display: flex;
