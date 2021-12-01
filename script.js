@@ -18,36 +18,37 @@ let productsheader = document.getElementById("products-header");
 
 let totalInCart = document.querySelector(".cart-total-products");
 
+let cart = [];
+let allProducts = [];
+let sortedProducts = [];
 
-/* Ta bort hela cart knapp */
-let deleteCart = document.querySelector(".cartPreview-deleteAll");
-deleteCart.addEventListener("click",() => {
-  cart.splice(0,cart.length);
-  addtoTotal();
-  updateTotalItems();
-  let container = document.getElementsByClassName("cart-product");
-   for (let i = container.length-1; i >= 0; i--) {
-    console.log(container[i]);
-    container[i].remove();
-     
-   }
-});
-/* Ta bort hela cart knapp */
+/*fetchar*/
+fetch("./products.json")
+  .then(function (respons) {
+    console.log(respons); //ska få status 200
+    if (respons.ok) {
+      return respons.json(); //parsea json objektet.
+    }
+  })
+  .then((data) => {
+    createProducts(data);
+    fillArray(data);
+  })
+  .catch((error) => console.log(error));
 
-popupClose.addEventListener("click", closePopup);
-cartButton.addEventListener("click", showCartPopup);
-popupBuyButton.addEventListener("click", addFromPopup);
+/*fyller sidan med produkter */
+function createProducts(elements) {
+  elements.forEach((product) => {
+    fillProductPage(product);
+  });
+}
 
-
-/* search bar */
-let searchInput = document.getElementById("searchInput");
-let searchButton = document.querySelector(".searchButton");
-
-searchButton.addEventListener("click", () => {
-  searchProduct(searchInput.value);
-});
-
-/* search bar */
+/*fyller allProducts array med alla produktobjekt*/
+function fillArray(elements) {
+  elements.forEach((product) => {
+    allProducts.push(product);
+  });
+}
 
 /* category */
 let allCategory = document.getElementById("all-category");
@@ -63,208 +64,6 @@ womencategory.addEventListener("click", showWomenCategory);
 mencategory.addEventListener("click", showMenCategory);
 jewelrycategory.addEventListener("click", showJewelryCategory);
 /*category */
-
-let cart = [];
-let allProducts = [];
-let sortedProducts = [];
-
-fetch("./products.json")
-  .then(function (respons) {
-    console.log(respons); //ska få status 200
-    if (respons.ok) {
-      return respons.json(); //parsea json objektet.
-    }
-  })
-  .then((data) => {
-    createProducts(data);
-    fillArray(data);
-  })
-  .catch((error) => console.log(error));
-
-
-function createProducts(elements) {
-  elements.forEach((product) => {
-    fillProductPage(product);
-  });
-}
-
-function fillArray(elements) {
-  elements.forEach((product) => {
-    allProducts.push(product);
-  });
-}
-
-
-/* fyller popup med info om produkten */
-function fillPopup(test) {
-  popupImage.src = test.image;
-  popupTitle.textContent = test.title;
-  popupDesc.textContent = test.description;
-  popupCategory.textContent = "Category: " + test.category;
-  popupRating.textContent = "Rating : " + test.rating.rate + " , " + "Amount left: " + test.rating.count;
-  popupPrice.textContent = "Price: $" + test.price;
-}
-/* END fyller popup med info om produkten */
-
-function showPopup() {
-  popupContainer.style.visibility = "visible";
-}
-
-function closePopup() {
-  popupContainer.style.visibility = "hidden";
-}
-
-function showCartPopup() {
-  if (cartPreview.style.visibility !== "visible") {
-    return (cartPreview.style.visibility = "visible");
-  } else {
-    return (cartPreview.style.visibility = "hidden");
-  }
-}
-
-function addToCart(product) {
-  updateCart(product);
-  addtoTotal();
-  updateTotalItems();
-
-  // saveToDatabase(cart);
-}
-
-function updateCart(product) {
-
-  let textId = product.id;
-  for (let i = 0; i < cart.length; i++) {
-    let currentId = cart[i].id;
-    if (textId === currentId) {
-      cart.push(product);
-      return;
-    }
-  }
-  cart.push(product);
-
-  let cartProduct = document.createElement("div");
-
-  let imgcontainer = document.createElement("div");
-  let image = document.createElement("img");
-  let price = document.createElement("p");
-  let title = document.createElement("p");
-
-  let cartAmount = document.createElement("div");
-  let decreaseBtn = document.createElement("button");
-  let amount = document.createElement("p");
-  amount.setAttribute("data-cart", product.id);
-  let increaseBtn = document.createElement("button");
-  let deleteItem = document.createElement("button");
-
-  cartProduct.className = "cart-product";
-  imgcontainer.className = "cart-productInfo";
-  image.className = "cart-image";
-  price.className = "cart-price";
-  title.className = "cart-title";
-
-  cartAmount.className = "cart-amount";
-  decreaseBtn.className = "decrease-amount";
-  amount.className = "in-cart-amount";
-  increaseBtn.className = "increase-amount";
-  deleteItem.className = "cart-delete-item";
-
-  decreaseBtn.innerHTML = "-";
-  increaseBtn.innerHTML = "+";
-  deleteItem.innerHTML = "delete";  
-  amount.innerHTML = parseInt(1);
-  image.src = product.image;
-  price.textContent = product.price + "$";
-  title.textContent = product.title;
-
-  imgcontainer.appendChild(image);
-  imgcontainer.appendChild(title);
-  imgcontainer.appendChild(price);
-
-  cartAmount.appendChild(decreaseBtn);
-  cartAmount.appendChild(amount);
-  cartAmount.appendChild(increaseBtn);
-  cartAmount.appendChild(deleteItem);
-
-  cartProduct.appendChild(imgcontainer);
-  cartProduct.appendChild(cartAmount);
-  cartPreview.appendChild(cartProduct);
-
-  decreaseBtn.addEventListener("click",function(){
-    let searched = Number(amount.getAttribute("data-cart"));
-    console.log(searched);
-    let i =0;
-    if(amount.innerHTML == 0) {
-      amount.style.background = "red";
-    } else {
-      // let firstInstance = cart.id.indexOf(searched);
-      // console.log(cart.id.indexOf(searched));
-      // cart.splice(firstInstance,1);
-      while(i < cart.length){
-        if(searched === cart[i].id){
-        cart.splice(i,1);
-        break;
-        } else {
-          i++;
-        }
-    }
-    addtoTotal();
-      updateTotalItems();
-      amount.innerHTML--;
-    console.log(cart);
-  }
-});
-
-  increaseBtn.addEventListener("click",() =>{
-    cart.push(product);
-    addtoTotal();
-    updateTotalItems();
-    amount.innerHTML++;
-    amount.style.background = "white";
-  });
-
-  deleteItem.addEventListener("click",function() {
-    let searched = Number(amount.getAttribute("data-cart"));
-    let i = 0;
-    while(i < cart.length){
-      if(searched === cart[i].id){
-        cart.splice(i,1);
-      } else {
-        i++;
-      }
-    }
-    amount.parentNode.parentNode.remove();
-    addtoTotal();
-    updateTotalItems();
-  });
-
-  // cartPageCheckout.appendChild(imgcontainer);
-}
-
-// function decreaseAmount(e){
-//   // let x = document.querySelector(".in-cart-amount").getAttribute("data-cart");
-
-//   let x = e.target.dataset.cart;
-//   console.log(x);
-// }
-
-function addFromPopup() {
-  let id = Number(popupImage.getAttribute("data-attribut"));
-  console.log(id);
-  allProducts.forEach((x) => {
-    if (id === x.id) {
-      addToCart(x);
-    }
-  });
-}
-
-
-function addtoTotal() {
-  let sum = 0;
-  cart.forEach((product) => {
-    sum += product.price;
-  });
-  cartPreviewtotal.textContent = "Total: " + parseFloat(sum).toFixed(2) + "$";
-}
 
 /* visar specifika category */
 function showAllcategories() {
@@ -334,8 +133,34 @@ function showJewelryCategory() {
     }
   });
 }
-
 /* End of visar specifika category */
+
+
+
+/* Ta bort hela cart knapp */
+let deleteCart = document.querySelector(".cartPreview-deleteAll");
+deleteCart.addEventListener("click", () => {
+  cart.splice(0, cart.length);
+  addtoTotal();
+  updateTotalItems();
+  let container = document.getElementsByClassName("cart-product");
+  for (let i = container.length - 1; i >= 0; i--) {
+    container[i].remove();
+  }
+});
+/* Ta bort hela cart knapp */
+
+popupClose.addEventListener("click", closePopup);
+cartButton.addEventListener("click", showCartPopup);
+popupBuyButton.addEventListener("click", addFromPopup);
+
+/* search bar */
+let searchInput = document.getElementById("searchInput");
+let searchButton = document.querySelector(".searchButton");
+
+searchButton.addEventListener("click", () => {
+  searchProduct(searchInput.value);
+});
 
 function searchProduct(searchedItem) {
   let searched = searchedItem.toUpperCase();
@@ -350,7 +175,9 @@ function searchProduct(searchedItem) {
     }
   });
 }
+/* search bar */
 
+/*söker baserat på pris */
 function changePrice() {
   let priceSort = document.getElementById("price-sort").value;
 
@@ -408,65 +235,242 @@ function changePrice() {
   }
 }
 
-  function updateTotalItems() {
-    totalInCart.innerHTML = "(" + cart.length + ")";
+
+/* fyller popup med info om produkten */
+function fillPopup(test) {
+  popupImage.src = test.image;
+  popupTitle.textContent = test.title;
+  popupDesc.textContent = test.description;
+  popupCategory.textContent = "Category: " + test.category;
+  popupRating.textContent =
+    "Rating : " +
+    test.rating.rate +
+    " , " +
+    "Amount left: " +
+    test.rating.count;
+  popupPrice.textContent = "Price: $" + test.price;
+}
+/* END fyller popup med info om produkten */
+
+function showPopup() {
+  popupContainer.style.visibility = "visible";
+}
+
+function closePopup() {
+  popupContainer.style.visibility = "hidden";
+}
+
+function showCartPopup() {
+  if (cartPreview.style.visibility !== "visible") {
+    return (cartPreview.style.visibility = "visible");
+  } else {
+    return (cartPreview.style.visibility = "hidden");
   }
+}
 
-  function fillProductPage(product) {
-    let imgcontainer = document.createElement("div");
-    let image = document.createElement("img");
-    let info = document.createElement("p");
-    let price = document.createElement("p");
-    let buyproduct = document.createElement("button");
+function addToCart(product) {
+  updateCart(product);
+  addtoTotal();
+  updateTotalItems();
+  // saveToDatabase(cart);
+}
 
-    imgcontainer.className = "product-preview";
-    image.className = "product-image";
-    info.className = "product-name";
-    price.className = "product-price";
-    buyproduct.className = "buy-button";
-
-    image.src = product.image;
-    info.textContent = product.title;
-    price.textContent = product.price + "$";
-    buyproduct.textContent = "Köp";
-
-    imgcontainer.appendChild(image);
-    imgcontainer.appendChild(info);
-    imgcontainer.appendChild(price);
-    imgcontainer.appendChild(buyproduct);
-
-    productContainer.appendChild(imgcontainer);
-
-    buyproduct.addEventListener("click", () => {
-      addToCart(product);
-      updateNumber(product);
-    });
-
-    info.addEventListener("click", () => {
-      showPopup();
-      fillPopup(product);
-    });
-    image.addEventListener("click", () => {
-      showPopup();
-      fillPopup(product);
-    });
+function updateCart(product) {
+  let textId = product.id;
+  for (let i = 0; i < cart.length; i++) {
+    let currentId = cart[i].id;
+    if (textId === currentId) {
+      cart.push(product);
+      return;
+    }
   }
+  cart.push(product);
 
-  // function getProductAmount(item) {
-  //   let sum = 0;
-  //   cart.forEach((x) => {
-  //     let y = x.id;
-  //     if (item.id === y) {
-  //       sum++;
-  //     }
-  //   });
-  //   return sum;
-  // }
+  let cartProduct = document.createElement("div");
 
-  function updateNumber(product){
+  let imgcontainer = document.createElement("div");
+  let image = document.createElement("img");
+  let price = document.createElement("p");
+  let title = document.createElement("p");
 
-  }
+  let cartAmount = document.createElement("div");
+  let decreaseBtn = document.createElement("button");
+  let amount = document.createElement("p");
+  amount.setAttribute("data-cart", product.id);
+  let increaseBtn = document.createElement("button");
+  let deleteItem = document.createElement("button");
 
+  cartProduct.className = "cart-product";
+  imgcontainer.className = "cart-productInfo";
+  image.className = "cart-image";
+  price.className = "cart-price";
+  title.className = "cart-title";
+
+  cartAmount.className = "cart-amount";
+  decreaseBtn.className = "decrease-amount";
+  amount.className = "in-cart-amount";
+  increaseBtn.className = "increase-amount";
+  deleteItem.className = "cart-delete-item";
+
+  decreaseBtn.innerHTML = "-";
+  increaseBtn.innerHTML = "+";
+  deleteItem.innerHTML = "delete";
+  amount.innerHTML = parseInt(0);
+  image.src = product.image;
+  price.textContent = product.price + "$";
+  title.textContent = product.title;
+
+  imgcontainer.appendChild(image);
+  imgcontainer.appendChild(title);
+  imgcontainer.appendChild(price);
+
+  cartAmount.appendChild(decreaseBtn);
+  cartAmount.appendChild(amount);
+  cartAmount.appendChild(increaseBtn);
+  cartAmount.appendChild(deleteItem);
+
+  cartProduct.appendChild(imgcontainer);
+  cartProduct.appendChild(cartAmount);
+  cartPreview.appendChild(cartProduct);
+
+  decreaseBtn.addEventListener("click", function () {
+    let searched = Number(amount.getAttribute("data-cart"));
+    console.log(searched);
+    let i = 0;
+    if (amount.innerHTML == 0) {
+      amount.style.background = "red";
+    } else {
+      // let firstInstance = cart.id.indexOf(searched);
+      // console.log(cart.id.indexOf(searched));
+      // cart.splice(firstInstance,1);
+      while (i < cart.length) {
+        if (searched === cart[i].id) {
+          cart.splice(i, 1);
+          break;
+        } else {
+          i++;
+        }
+      }
+      addtoTotal();
+      updateTotalItems();
+      amount.innerHTML--;
+    }
+  });
+
+  increaseBtn.addEventListener("click", () => {
+    cart.push(product);
+    addtoTotal();
+    updateTotalItems();
+    amount.innerHTML++;
+    amount.style.background = "white";
+  });
+
+  deleteItem.addEventListener("click", function () {
+    let searched = Number(amount.getAttribute("data-cart"));
+    let i = 0;
+    while (i < cart.length) {
+      if (searched === cart[i].id) {
+        cart.splice(i, 1);
+      } else {
+        i++;
+      }
+    }
+    amount.parentNode.parentNode.remove();
+    addtoTotal();
+    updateTotalItems();
+  });
+
+  // cartPageCheckout.appendChild(imgcontainer);
+}
+
+// function decreaseAmount(e){
+//   // let x = document.querySelector(".in-cart-amount").getAttribute("data-cart");
+
+//   let x = e.target.dataset.cart;
+//   console.log(x);
+// }
+
+function addFromPopup() {
+  let id = Number(popupImage.getAttribute("data-attribut"));
+  console.log(id);
+  allProducts.forEach((x) => {
+    if (id === x.id) {
+      addToCart(x);
+    }
+  });
+}
+
+function addtoTotal() {
+  let sum = 0;
+  cart.forEach((product) => {
+    sum += product.price;
+  });
+  cartPreviewtotal.textContent = "Total: " + parseFloat(sum).toFixed(2) + "$";
+}
+
+
+
+function updateTotalItems() {
+  totalInCart.innerHTML = "(" + cart.length + ")";
+}
+
+function fillProductPage(product) {
+  let imgcontainer = document.createElement("div");
+  let image = document.createElement("img");
+  let info = document.createElement("p");
+  let price = document.createElement("p");
+  let buyproduct = document.createElement("button");
+
+  imgcontainer.className = "product-preview";
+  image.className = "product-image";
+  info.className = "product-name";
+  price.className = "product-price";
+  buyproduct.className = "buy-button";
+
+  image.src = product.image;
+  info.textContent = product.title;
+  price.textContent = product.price + "$";
+  buyproduct.textContent = "Köp";
+
+  imgcontainer.appendChild(image);
+  imgcontainer.appendChild(info);
+  imgcontainer.appendChild(price);
+  imgcontainer.appendChild(buyproduct);
+
+  productContainer.appendChild(imgcontainer);
+
+  buyproduct.addEventListener("click", () => {
+    addToCart(product);
+    updateNumber(product);
+  });
+
+  info.addEventListener("click", () => {
+    showPopup();
+    fillPopup(product);
+  });
+  image.addEventListener("click", () => {
+    showPopup();
+    fillPopup(product);
+  });
+}
+
+// function updateNumber(product) {
+//   let id = product.id;
+//   let ptagg = document.querySelector(".in-cart-amount");
+//   let cartnbr = Number(ptagg.dataset.cart);
+//   // console.log(Number(ptagg.dataset.cart));
+//   // console.log(id);
+//   for (let i = 0; i < ptagg.length; i++) {
+//     if (cartnbr === id) {
+//       console.log("test");
+//       console.log(Number(ptagg.dataset.cart));
+//       ptagg.innerHTML++;
+//       console.log(ptagg);
+//     }
+//   }
+//   console.log(Number(ptagg.dataset.cart));
+  
+// }
 
 //Hur hemsidan memorerar ens cart när man byter sida.
 
