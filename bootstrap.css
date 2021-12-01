@@ -50,7 +50,7 @@ body {
   top: 32%;
   left: 100%;
   width: 33%;
-  height: 50%;
+  height: 55%;
   transform: translate(-101%, -50%);
   border: solid 1px black;
   box-shadow: 1px 1px 1px 1px black;
@@ -84,11 +84,11 @@ body {
   top: 0;
   width: 100%;
 }
-.cartPreview-btn {
+.cartPreview-btn , .cartPreview-deleteAll {
   background-color: rgb(252, 190, 190);
   border-radius: 8px;
 }
-.cartPreview-btn:hover {
+.cartPreview-btn:hover , .cartPreview-deleteAll:hover{
   background-color: rgb(255, 225, 225);
 }
 .cartPreview-checkout a:hover {

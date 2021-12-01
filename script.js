@@ -18,9 +18,26 @@ let productsheader = document.getElementById("products-header");
 
 let totalInCart = document.querySelector(".cart-total-products");
 
+
+/* Ta bort hela cart knapp */
+let deleteCart = document.querySelector(".cartPreview-deleteAll");
+deleteCart.addEventListener("click",() => {
+  cart.splice(0,cart.length);
+  addtoTotal();
+  updateTotalItems();
+  let container = document.getElementsByClassName("cart-product");
+   for (let i = container.length-1; i >= 0; i--) {
+    console.log(container[i]);
+    container[i].remove();
+     
+   }
+});
+/* Ta bort hela cart knapp */
+
 popupClose.addEventListener("click", closePopup);
 cartButton.addEventListener("click", showCartPopup);
 popupBuyButton.addEventListener("click", addFromPopup);
+
 
 /* search bar */
 let searchInput = document.getElementById("searchInput");
