@@ -220,7 +220,7 @@ function changePrice() {
       });
     }
   } else {
-    productsheader.innerHTML = "OUR PRODUCTS :";
+    productsheader.innerHTML = currentcategory + ":";
     productContainer.innerHTML = "";
     productContainer.appendChild(productsheader);
     if (currentcategory === "all") {
