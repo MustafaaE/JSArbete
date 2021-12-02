@@ -91,6 +91,8 @@ function fillProductPage(product) {
     fillPopup(product);
   });
 }
+
+
 /* category */
 let allCategory = document.getElementById("all-category");
 let electronicscategory = document.getElementById("electronics-category");
@@ -174,25 +176,40 @@ function showJewelryCategory() {
   });
 }
 /* End of visar specifika category */
+/* fyller popup med info om produkten */
 
-
-
-/* Ta bort hela cart knapp */
-let deleteCart = document.querySelector(".cartPreview-deleteAll");
-deleteCart.addEventListener("click", () => {
-  cart.splice(0, cart.length);
-  addtoTotal();
-  updateTotalItems();
-  let container = document.getElementsByClassName("cart-product");
-  for (let i = container.length - 1; i >= 0; i--) {
-    container[i].remove();
+function fillPopup(test) {
+  if(document.contains(document.querySelector(".popup-buy-button"))){
+    document.querySelector(".popup-buy-button").remove();
   }
-});
-/* Ta bort hela cart knapp */
+  let popupBuyButton = document.createElement("button");
+  popupBuyButton.className = "popup-buy-button";
+  popupBuyButton.innerHTML = "Köp";
+  popupImage.src = test.image;
+  popupTitle.textContent = test.title;
+  popupDesc.textContent = test.description;
+  popupCategory.textContent = "Category: " + test.category;
+  popupRating.textContent = "Rating : " + test.rating.rate + " , " + "Amount left: " + test.rating.count;
+  popupPrice.textContent = "Price: $" + test.price;
+  popupfooter.appendChild(popupBuyButton);
+  popupBuyButton.addEventListener("click", () =>{
+    addToCart(test);
+    updateNumber(test);
+  });
+
+}
+/* END fyller popup med info om produkten */
 
 popupClose.addEventListener("click", closePopup);
 cartButton.addEventListener("click", showCartPopup);
-// popupBuyButton.addEventListener("click", addFromPopup);
+
+function showPopup() {
+  popupContainer.style.visibility = "visible";
+}
+
+function closePopup() {
+  popupContainer.style.visibility = "hidden";
+}
 
 /* search bar */
 let searchInput = document.getElementById("searchInput");
@@ -276,38 +293,6 @@ function changePrice() {
 }
 
 
-/* fyller popup med info om produkten */
-function fillPopup(test) {
-  if(document.contains(document.querySelector(".popup-buy-button"))){
-    document.querySelector(".popup-buy-button").remove();
-  }
-  let popupBuyButton = document.createElement("button");
-  popupBuyButton.className = "popup-buy-button";
-  popupBuyButton.innerHTML = "Köp";
-  popupImage.src = test.image;
-  popupTitle.textContent = test.title;
-  popupDesc.textContent = test.description;
-  popupCategory.textContent = "Category: " + test.category;
-  popupRating.textContent = "Rating : " + test.rating.rate + " , " + "Amount left: " + test.rating.count;
-  popupPrice.textContent = "Price: $" + test.price;
-  popupfooter.appendChild(popupBuyButton);
-  popupBuyButton.addEventListener("click", () =>{
-    addToCart(test);
-    updateNumber(test);
-  });
-
-}
-/* END fyller popup med info om produkten */
-
-function showPopup() {
-  popupContainer.style.visibility = "visible";
-}
-
-function closePopup() {
-  popupContainer.style.visibility = "hidden";
-
-}
-
 function showCartPopup() {
   if (cartPreview.style.visibility !== "visible") {
     return (cartPreview.style.visibility = "visible");
@@ -320,8 +305,19 @@ function addToCart(product) {
   updateCart(product);
   addtoTotal();
   updateTotalItems();
- // saveToDatabase(cart);
 }
+/* Ta bort hela cart knapp */
+let deleteCart = document.querySelector(".cartPreview-deleteAll");
+deleteCart.addEventListener("click", () => {
+  cart.splice(0, cart.length);
+  addtoTotal();
+  updateTotalItems();
+  let container = document.getElementsByClassName("cart-product");
+  for (let i = container.length - 1; i >= 0; i--) {
+    container[i].remove();
+  }
+});
+/* Ta bort hela cart knapp */
 
 function updateCart(product) {
   let textId = product.id;
@@ -387,9 +383,6 @@ function updateCart(product) {
     if (amount.innerHTML == 0) {
       amount.style.background = "red";
     } else {
-      // let firstInstance = cart.id.indexOf(searched);
-      // console.log(cart.id.indexOf(searched));
-      // cart.splice(firstInstance,1);
       while (i < cart.length) {
         if (searched === cart[i].id) {
           cart.splice(i, 1);
@@ -427,24 +420,6 @@ function updateCart(product) {
     updateTotalItems();
   });
 
-  // cartPageCheckout.appendChild(imgcontainer);
-}
-
-// function decreaseAmount(e){
-//   // let x = document.querySelector(".in-cart-amount").getAttribute("data-cart");
-
-//   let x = e.target.dataset.cart;
-//   console.log(x);
-// }
-
-function addFromPopup() {
-  let id = Number(popupImage.getAttribute("data-attribut"));
-  console.log(id);
-  allProducts.forEach((x) => {
-    if (id === x.id) {
-      addToCart(x);
-    }
-  });
 }
 
 function addtoTotal() {
