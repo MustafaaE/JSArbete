@@ -8,7 +8,6 @@ let popupDesc = document.querySelector(".popup-description");
 let popupCategory = document.querySelector(".popup-category");
 let popupRating = document.querySelector(".popup-rating");
 let popupPrice = document.querySelector(".popup-price");
-// let popupBuyButton = document.querySelector(".popup-buy-button");
 let cartButton = document.querySelector(".shoppingcart-button");
 let cartPreview = document.querySelector(".cartPreview");
 let cartPreviewtotal = document.querySelector(".cartPreview-total");
@@ -53,6 +52,46 @@ function fillArray(elements) {
   });
 }
 
+function fillProductPage(product) {
+  let imgcontainer = document.createElement("div");
+  let image = document.createElement("img");
+  let info = document.createElement("p");
+  let price = document.createElement("p");
+  let buyproduct = document.createElement("button");
+
+  imgcontainer.className = "product-preview";
+  image.className = "product-image";
+  info.className = "product-name";
+  price.className = "product-price";
+  buyproduct.className = "buy-button";
+
+  image.src = product.image;
+  info.textContent = product.title;
+  price.textContent = product.price + "$";
+  buyproduct.textContent = "Köp";
+
+  imgcontainer.appendChild(image);
+  imgcontainer.appendChild(info);
+  imgcontainer.appendChild(price);
+  imgcontainer.appendChild(buyproduct);
+
+  productContainer.appendChild(imgcontainer);
+
+  buyproduct.addEventListener("click", () => {
+    addToCart(product);
+    updateNumber(product);
+  });
+
+  info.addEventListener("click", () => {
+    showPopup();
+    fillPopup(product);
+    console.log("test");
+  });
+  image.addEventListener("click", () => {
+    showPopup();
+    fillPopup(product);
+  });
+}
 /* category */
 let allCategory = document.getElementById("all-category");
 let electronicscategory = document.getElementById("electronics-category");
@@ -421,47 +460,6 @@ function addtoTotal() {
 
 function updateTotalItems() {
   totalInCart.innerHTML = "(" + cart.length + ")";
-}
-
-function fillProductPage(product) {
-  let imgcontainer = document.createElement("div");
-  let image = document.createElement("img");
-  let info = document.createElement("p");
-  let price = document.createElement("p");
-  let buyproduct = document.createElement("button");
-
-  imgcontainer.className = "product-preview";
-  image.className = "product-image";
-  info.className = "product-name";
-  price.className = "product-price";
-  buyproduct.className = "buy-button";
-
-  image.src = product.image;
-  info.textContent = product.title;
-  price.textContent = product.price + "$";
-  buyproduct.textContent = "Köp";
-
-  imgcontainer.appendChild(image);
-  imgcontainer.appendChild(info);
-  imgcontainer.appendChild(price);
-  imgcontainer.appendChild(buyproduct);
-
-  productContainer.appendChild(imgcontainer);
-
-  buyproduct.addEventListener("click", () => {
-    addToCart(product);
-    updateNumber(product);
-  });
-
-  info.addEventListener("click", () => {
-    showPopup();
-    fillPopup(product);
-    console.log("test");
-  });
-  image.addEventListener("click", () => {
-    showPopup();
-    fillPopup(product);
-  });
 }
 
 function updateNumber(product) {
