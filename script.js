@@ -22,7 +22,6 @@ let popupfooter = document.querySelector(".popup-footer");
 
 let cart = [];
 let allProducts = [];
-let sortedProducts = [];
 
 /*fetchar*/
 fetch("./products.json")
