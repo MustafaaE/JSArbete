@@ -1,2 +1,2 @@
 # Webbshop
-En webbshop uppbyggd av Javascript,Html&CSS
+En webbshop uppbyggd av Javascript,HTML&CSS
